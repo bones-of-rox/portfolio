@@ -1,0 +1,15 @@
+# build output
+dist/
+.astro/
+
+# dependencies
+node_modules/
+
+# environment and editor files
+.env
+.env.*
+.DS_Store
+.vscode/
+
+# original, full-size photos never go in the repo
+originals/
