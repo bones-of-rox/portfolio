@@ -22,6 +22,8 @@ Personal portfolio for Donovan, a UX designer and UX leader. Sections: UX case s
 - [Astro](https://astro.build), a static site. Content is Markdown files. Use `astro:assets` images, which enforce alt text and optimize images.
 - Hosted on GitHub Pages and deployed by `.github/workflows/deploy.yml` on every push to `main`.
 - Domain: donovanpreddy.com, to be connected at launch (stage 7).
+- Design tokens live in `src/styles/tokens.css`. Base styles are in `src/styles/global.css`, and the page frame is `src/layouts/BaseLayout.astro`. The `/style-guide/` page shows every token.
+- Look: dark grays, with an orange accent for buttons, links, and focus, and a teal highlight for small labels. Fraunces (serif) for headings, Inter (sans) for body text.
 - Commands: `npm run dev` for a local preview, `npm run build` for a production build.
 
 ## Plan

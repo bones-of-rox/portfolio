@@ -1,0 +1,222 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const colors = [
+  { token: '--color-bg', name: 'Background', use: 'Page background' },
+  { token: '--color-surface', name: 'Surface', use: 'Cards and panels' },
+  { token: '--color-surface-raised', name: 'Raised surface', use: 'Hover states, inputs' },
+  { token: '--color-border', name: 'Border', use: 'Dividers' },
+  { token: '--color-border-strong', name: 'Strong border', use: 'Outlined buttons, controls' },
+  { token: '--color-text-muted', name: 'Muted text', use: 'Secondary text' },
+  { token: '--color-text', name: 'Text', use: 'Body text and headings' },
+  { token: '--color-accent', name: 'Accent', use: 'Buttons, links, focus ring' },
+  { token: '--color-accent-hover', name: 'Accent hover', use: 'Hovered buttons and links' },
+  { token: '--color-highlight', name: 'Highlight', use: 'Small labels and tags' },
+];
+
+const sizes = ['4xl', '3xl', '2xl', 'xl', 'lg', 'base', 'sm'];
+const spaces = ['1', '2', '3', '4', '6', '8', '12', '16'];
+---
+
+<BaseLayout title="Style guide" noindex>
+  <div class="container guide">
+    <header class="guide-intro">
+      <p class="eyebrow">Design foundations</p>
+      <h1>Style guide</h1>
+      <p class="lead">
+        The design tokens every page is built from. Change a token in one place and the whole site updates.
+      </p>
+    </header>
+
+    <section aria-labelledby="color-heading">
+      <h2 id="color-heading">Color</h2>
+      <ul class="swatches" role="list">
+        {
+          colors.map((c) => (
+            <li class="swatch">
+              <span class="swatch-chip" style={`background-color: var(${c.token})`} />
+              <span class="swatch-name">{c.name}</span>
+              <code>{c.token}</code>
+              <span class="swatch-use">{c.use}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <section aria-labelledby="type-heading">
+      <h2 id="type-heading">Type</h2>
+      <div class="pairing">
+        <div>
+          <p class="eyebrow">Headings</p>
+          <p class="font-sample font-sample-serif">Fraunces</p>
+          <p>A soft, characterful serif for headings and the site name.</p>
+        </div>
+        <div>
+          <p class="eyebrow">Body and interface</p>
+          <p class="font-sample font-sample-sans">Inter</p>
+          <p>A clear, highly readable sans-serif for paragraphs, navigation, and buttons.</p>
+        </div>
+      </div>
+      <ul class="scale" role="list">
+        {
+          sizes.map((s) => (
+            <li class="scale-row">
+              <code>--text-{s}</code>
+              <span class="scale-sample" style={`font-size: var(--text-${s})`}>
+                Designing with people
+              </span>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <section aria-labelledby="space-heading">
+      <h2 id="space-heading">Spacing</h2>
+      <ul class="spaces" role="list">
+        {
+          spaces.map((s) => (
+            <li class="space-row">
+              <code>--space-{s}</code>
+              <span class="space-bar" style={`width: var(--space-${s})`} />
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <section aria-labelledby="components-heading">
+      <h2 id="components-heading">Buttons and links</h2>
+      <div class="demo-row">
+        <a class="button button-primary" href="#components-heading">Primary button</a>
+        <a class="button button-secondary" href="#components-heading">Secondary button</a>
+      </div>
+      <p>
+        Body text with <a href="#components-heading">an inline link</a>. Press Tab to see the focus ring on each
+        link and button.
+      </p>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .guide {
+    display: grid;
+    gap: var(--space-section);
+    padding-block: var(--space-section) 0;
+  }
+
+  .guide-intro,
+  section {
+    display: grid;
+    gap: var(--space-4);
+  }
+
+  .swatches {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
+    gap: var(--space-4);
+    padding: 0;
+  }
+
+  .swatch {
+    display: grid;
+    gap: var(--space-1);
+    font-size: var(--text-sm);
+  }
+
+  .swatch-chip {
+    height: var(--space-16);
+    margin-bottom: var(--space-2);
+    border: var(--border-width) solid var(--color-border-strong);
+    border-radius: var(--radius-md);
+  }
+
+  .swatch-name {
+    font-weight: var(--weight-semibold);
+  }
+
+  .swatch-use {
+    color: var(--color-text-muted);
+  }
+
+  code {
+    font-size: var(--text-sm);
+    color: var(--color-highlight);
+  }
+
+  .pairing {
+    display: grid;
+    gap: var(--space-6);
+  }
+
+  @media (min-width: 40em) {
+    .pairing {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .pairing > div {
+    display: grid;
+    gap: var(--space-2);
+    padding: var(--space-6);
+    border-radius: var(--radius-lg);
+    background-color: var(--color-surface);
+  }
+
+  .font-sample {
+    font-size: var(--text-3xl);
+    line-height: var(--leading-tight);
+  }
+
+  .font-sample-serif {
+    font-family: var(--font-serif);
+  }
+
+  .font-sample-sans {
+    font-family: var(--font-sans);
+    font-weight: var(--weight-semibold);
+  }
+
+  .scale,
+  .spaces {
+    display: grid;
+    gap: var(--space-3);
+    padding: 0;
+  }
+
+  .scale-row {
+    display: grid;
+    gap: var(--space-1);
+    padding-bottom: var(--space-3);
+    border-bottom: var(--border-width) solid var(--color-border);
+  }
+
+  .scale-sample {
+    font-family: var(--font-heading);
+    line-height: var(--leading-tight);
+  }
+
+  .space-row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+  }
+
+  .space-row code {
+    min-width: var(--space-16);
+  }
+
+  .space-bar {
+    height: var(--space-4);
+    border-radius: var(--radius-sm);
+    background-color: var(--color-accent);
+  }
+
+  .demo-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+  }
+</style>

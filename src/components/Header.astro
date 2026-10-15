@@ -1,0 +1,98 @@
+---
+import { url } from '../utils';
+
+const links = [
+  { href: url('/work/'), label: 'Work' },
+  { href: url('/made/'), label: 'Made' },
+  { href: url('/about/'), label: 'About' },
+];
+
+const current = Astro.url.pathname;
+const isCurrent = (href: string) => current === href || current.startsWith(href);
+---
+
+<header class="site-header">
+  <div class="container site-header-inner">
+    <a class="site-name" href={url('/')}>Donovan Preddy</a>
+    <nav aria-label="Main">
+      <ul class="nav-list" role="list">
+        {
+          links.map((link) => (
+            <li>
+              <a
+                class="nav-link"
+                href={link.href}
+                aria-current={isCurrent(link.href) ? 'page' : undefined}
+              >
+                {link.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    border-bottom: var(--border-width) solid var(--color-border);
+  }
+
+  .site-header-inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-2) var(--space-6);
+    padding-block: var(--space-3);
+  }
+
+  .site-name {
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--target-min);
+    font-family: var(--font-heading);
+    font-size: var(--text-xl);
+    font-weight: var(--weight-medium);
+    color: var(--color-text);
+    text-decoration: none;
+  }
+
+  .site-name:hover {
+    color: var(--color-accent);
+  }
+
+  .nav-list {
+    display: flex;
+    gap: var(--space-1);
+    /* Pull the links out by their padding so the text lines up with the page edge */
+    margin-inline: calc(var(--space-3) * -1);
+    padding: 0;
+    list-style: none;
+  }
+
+  .nav-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--target-min);
+    padding-inline: var(--space-3);
+    border-radius: var(--radius-pill);
+    font-weight: var(--weight-medium);
+    color: var(--color-text-muted);
+    text-decoration: none;
+  }
+
+  .nav-link:hover {
+    color: var(--color-text);
+    background-color: var(--color-surface-raised);
+  }
+
+  .nav-link[aria-current='page'] {
+    color: var(--color-text);
+    text-decoration: underline;
+    text-decoration-color: var(--color-accent);
+    text-decoration-thickness: var(--focus-width);
+    text-underline-offset: var(--space-2);
+  }
+</style>

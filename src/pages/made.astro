@@ -1,0 +1,18 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Made">
+  <section class="container page">
+    <h1>Made</h1>
+    <p class="lead">A gallery of 3D-printed products and furniture I've made is on its way.</p>
+  </section>
+</BaseLayout>
+
+<style>
+  .page {
+    display: grid;
+    gap: var(--space-4);
+    padding-block: var(--space-section);
+  }
+</style>
