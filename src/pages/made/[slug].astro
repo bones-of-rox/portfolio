@@ -21,7 +21,7 @@ interface Props {
 }
 
 const { piece, newer, older } = Astro.props;
-const { title, summary, type, date, dateLabel, madeFor, materials, tools, size, cover, photos, videos } =
+const { title, summary, type, date, dateLabel, madeFor, materials, tools, size, cover, photos, photoLayout, videos } =
   piece.data;
 const { Content } = await render(piece);
 
@@ -90,9 +90,9 @@ const videoList = await Promise.all(
       photos.length > 0 && (
         <section class="photos" aria-labelledby="photos-heading">
           <h2 id="photos-heading" class="visually-hidden">Photos</h2>
-          <ul class="photo-grid" role="list">
+          <ul class:list={['photo-grid', { 'photo-grid-even': photoLayout === 'grid' }]} role="list">
             {photos.map((photo) => (
-              <li class={photo.src.width > photo.src.height ? 'tile tile-wide' : 'tile'}>
+              <li class={photoLayout === 'mixed' && photo.src.width > photo.src.height ? 'tile tile-wide' : 'tile'}>
                 <figure>
                   <Image
                     src={photo.src}
@@ -296,6 +296,27 @@ const videoList = await Promise.all(
   @media (min-width: 40em) {
     .tile-wide {
       grid-column: 1 / -1;
+    }
+  }
+
+  /* Even grid: square tiles, two across on phones, up to four on wide screens */
+  .photo-grid-even {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .photo-grid-even .tile .photo {
+    aspect-ratio: 1;
+  }
+
+  @media (min-width: 40em) {
+    .photo-grid-even {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 64em) {
+    .photo-grid-even {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
     }
   }
 

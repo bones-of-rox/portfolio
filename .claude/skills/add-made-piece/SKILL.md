@@ -15,7 +15,7 @@ Donovan sends photos (and sometimes a video), plus a dictated title, background,
 - Copy the original files to `originals/<slug>/`. That folder is git-ignored.
 - Photos: use `sharp` (already installed with Astro) to auto-rotate, fit within 1800×1800, and save as JPEG at quality 80 with mozjpeg. Sharp's output drops EXIF, which removes phone location data. Save with descriptive names in `src/content/made/<slug>/`.
 - Lead (cover) photo: Donovan prefers a wide, full-width lead image. Crop the best group or hero shot to 3:2 landscape, and keep the whole piece in frame.
-- Other photos are tiled below the story. Tall photos sit side by side as 4:5 tiles, and wide photos span the full row. The page has no visible "Photos" or video headings.
+- Other photos are tiled below the story. Tall photos sit side by side as 4:5 tiles, and wide photos span the full row. The page has no visible "Photos" or video headings. For a series of similar objects (e.g. a set of magnets), set `photoLayout: grid` so every photo is an even square tile.
 - Gallery thumbnail: tiles are 4:5 portrait. If the cover photo doesn't crop well to 4:5, or Donovan picks a different image, make a 4:5 crop and set it as `thumbnail`. Trim black bars from phone screenshots.
 - Video: install `ffmpeg-static` in the scratchpad, not the project. Strip the audio when it's silent or not needed. Otherwise it needs captions. Scale to 720px wide at 30fps. Export both `public/made/<slug>/<name>.mp4` (H.264, CRF 26, `+faststart`) and `<name>.webm` (VP9, CRF 38). Save a poster frame as `src/content/made/<slug>/<name>-poster.jpg`. If Donovan names the video, set `video.title` and it shows as a heading above the video. Without a title, the video has no visible heading.
 

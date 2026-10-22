@@ -29,6 +29,9 @@ const made = defineCollection({
       cover: photo, // lead photo on the detail page
       thumbnail: photo.optional(), // gallery tile (4:5); falls back to cover
       photos: z.array(photo).default([]),
+      // mixed: tall photos as 4:5 tiles, wide photos span the row
+      // grid: every photo as an even square tile (good for a series of similar objects)
+      photoLayout: z.enum(['mixed', 'grid']).default('mixed'),
       videos: z
         .array(
           z.object({
