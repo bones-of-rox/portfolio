@@ -39,4 +39,4 @@ Stages:
 6. Accessibility and speed QA
 7. Launch
 
-Adding a Made piece from Donovan's phone: they attach photos and dictate in the Claude app. Claude resizes the photos, writes the entry, and drafts alt text for Donovan to confirm. Claude publishes only after Donovan says so.
+Adding a Made piece from Donovan's phone: they attach photos and dictate in the Claude app. Claude resizes the photos, writes the entry, and drafts alt text for Donovan to confirm. Claude publishes only after Donovan says so. Follow `.claude/skills/add-made-piece/SKILL.md`.

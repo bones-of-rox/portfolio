@@ -1,0 +1,85 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import { url } from '../utils';
+
+interface Props {
+  piece: CollectionEntry<'made'>;
+}
+
+const { piece } = Astro.props;
+const { title, type, dateLabel, date, cover, thumbnail } = piece.data;
+const when = dateLabel ?? String(date.getFullYear());
+---
+
+<li class="card">
+  <a class="card-link" href={url(`/made/${piece.id}/`)}>
+    <div class="card-media">
+      <Image
+        src={(thumbnail ?? cover).src}
+        alt=""
+        widths={[320, 480, 640, 960]}
+        sizes="(min-width: 64em) 22rem, (min-width: 40em) 33vw, 50vw"
+        class="card-image"
+      />
+    </div>
+    <span class="card-title">{title}</span>
+    <span class="card-meta">{type} · {when}</span>
+  </a>
+</li>
+
+<style>
+  .card-link {
+    display: grid;
+    gap: var(--space-1);
+    color: var(--color-text);
+    text-decoration: none;
+    border-radius: var(--radius-md);
+  }
+
+  .card-media {
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    margin-bottom: var(--space-2);
+    border-radius: var(--radius-md);
+    background-color: var(--color-surface);
+  }
+
+  .card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition:
+      transform var(--duration-medium) var(--ease-out),
+      filter var(--duration-medium) var(--ease-out);
+  }
+
+  .card-title {
+    font-family: var(--font-heading);
+    font-size: var(--text-lg);
+    font-weight: var(--weight-medium);
+    line-height: var(--leading-snug);
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    text-decoration-thickness: var(--underline-thickness);
+    text-underline-offset: var(--underline-offset);
+    transition: text-decoration-color var(--duration-fast);
+  }
+
+  .card-meta {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+  }
+
+  /* Hover (mouse) and keyboard focus share the same effect */
+  .card-link:hover .card-image,
+  .card-link:focus-visible .card-image {
+    transform: scale(var(--hover-zoom));
+    filter: brightness(var(--hover-dim));
+  }
+
+  .card-link:hover .card-title,
+  .card-link:focus-visible .card-title {
+    text-decoration-color: var(--color-accent);
+  }
+</style>

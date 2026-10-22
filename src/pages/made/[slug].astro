@@ -1,0 +1,333 @@
+---
+import { Image, getImage } from 'astro:assets';
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { url } from '../../utils';
+
+export async function getStaticPaths() {
+  const pieces = (await getCollection('made', ({ data }) => !data.draft)).sort(
+    (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+  );
+  return pieces.map((piece, i) => ({
+    params: { slug: piece.id },
+    props: { piece, newer: pieces[i - 1], older: pieces[i + 1] },
+  }));
+}
+
+interface Props {
+  piece: CollectionEntry<'made'>;
+  newer?: CollectionEntry<'made'>;
+  older?: CollectionEntry<'made'>;
+}
+
+const { piece, newer, older } = Astro.props;
+const { title, summary, type, date, dateLabel, madeFor, materials, tools, size, cover, photos, video } =
+  piece.data;
+const { Content } = await render(piece);
+
+const facts = [
+  { label: 'Type', value: type },
+  { label: 'When', value: dateLabel ?? String(date.getFullYear()) },
+  { label: 'Made for', value: madeFor },
+  { label: 'Materials', value: materials?.join(', ') },
+  { label: 'Tools', value: tools?.join(', ') },
+  { label: 'Size', value: size },
+].filter((fact) => fact.value);
+
+const videoBase = video ? url(`/made/${piece.id}/${video.src}`) : undefined;
+const poster = video ? await getImage({ src: video.poster, width: 960, format: 'webp' }) : undefined;
+---
+
+<BaseLayout title={title} description={summary}>
+  <article class="container piece">
+    <a class="back-link" href={url('/made/')}>
+      <span aria-hidden="true">←</span> All made pieces
+    </a>
+
+    <header class="piece-header">
+      <p class="eyebrow">{type}</p>
+      <h1>{title}</h1>
+      <p class="lead">{summary}</p>
+    </header>
+
+    <Image
+      src={cover.src}
+      alt={cover.alt}
+      widths={[480, 800, 1200, 1600]}
+      sizes="(min-width: 72rem) 68rem, 100vw"
+      class="piece-cover"
+      loading="eager"
+      fetchpriority="high"
+    />
+
+    <div class="piece-body">
+      <div class="piece-story">
+        <h2 class="visually-hidden">The story</h2>
+        <Content />
+      </div>
+
+      <section class="facts" aria-labelledby="facts-heading">
+        <h2 id="facts-heading" class="facts-heading">Quick facts</h2>
+        <dl>
+          {
+            facts.map((fact) => (
+              <div class="fact">
+                <dt>{fact.label}</dt>
+                <dd>{fact.value}</dd>
+              </div>
+            ))
+          }
+        </dl>
+      </section>
+    </div>
+
+    {
+      photos.length > 0 && (
+        <section class="photos" aria-labelledby="photos-heading">
+          <h2 id="photos-heading">Photos</h2>
+          <ul class="photo-grid" role="list">
+            {photos.map((photo) => (
+              <li>
+                <figure>
+                  <Image
+                    src={photo.src}
+                    alt={photo.alt}
+                    widths={[480, 800, 1200]}
+                    sizes="(min-width: 40em) 50vw, 100vw"
+                    class="photo"
+                  />
+                  {photo.caption && <figcaption>{photo.caption}</figcaption>}
+                </figure>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )
+    }
+
+    {
+      video && (
+        <section class="video" aria-labelledby="video-heading">
+          <h2 id="video-heading">The 3D model</h2>
+          <figure>
+            <video
+              controls
+              muted
+              loop
+              playsinline
+              preload="none"
+              poster={poster?.src}
+              class="video-player"
+              aria-describedby="video-description"
+            >
+              <source src={`${videoBase}.webm`} type="video/webm" />
+              <source src={`${videoBase}.mp4`} type="video/mp4" />
+            </video>
+            <figcaption id="video-description">{video.description}</figcaption>
+          </figure>
+        </section>
+      )
+    }
+
+    {
+      (newer || older) && (
+        <nav class="pager" aria-label="More made pieces">
+          {older && (
+            <a class="pager-link" href={url(`/made/${older.id}/`)}>
+              <span class="pager-label">Previous</span>
+              <span class="pager-title">{older.data.title}</span>
+            </a>
+          )}
+          {newer && (
+            <a class="pager-link pager-next" href={url(`/made/${newer.id}/`)}>
+              <span class="pager-label">Next</span>
+              <span class="pager-title">{newer.data.title}</span>
+            </a>
+          )}
+        </nav>
+      )
+    }
+  </article>
+</BaseLayout>
+
+<style>
+  .piece {
+    display: grid;
+    gap: var(--space-10);
+    padding-top: var(--space-8);
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    justify-self: start;
+    min-height: var(--target-min);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-medium);
+  }
+
+  .piece-header {
+    display: grid;
+    gap: var(--space-4);
+  }
+
+  /* Show the whole photo at its own shape, never cropped */
+  .piece-cover {
+    width: auto;
+    max-width: 100%;
+    max-height: 80vh;
+    border-radius: var(--radius-lg);
+  }
+
+  .piece-body {
+    display: grid;
+    gap: var(--space-10);
+  }
+
+  @media (min-width: 64em) {
+    .piece-body {
+      grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+      align-items: start;
+    }
+  }
+
+  .piece-story {
+    display: grid;
+    gap: var(--space-5);
+    font-size: var(--text-lg);
+  }
+
+  .facts {
+    display: grid;
+    gap: var(--space-4);
+    padding: var(--space-6);
+    border-radius: var(--radius-lg);
+    background-color: var(--color-surface);
+  }
+
+  .facts-heading {
+    font-size: var(--text-xl);
+  }
+
+  .facts dl {
+    display: grid;
+    gap: var(--space-3);
+  }
+
+  .fact {
+    display: grid;
+    gap: var(--space-1);
+    padding-bottom: var(--space-3);
+    border-bottom: var(--border-width) solid var(--color-border);
+  }
+
+  .fact:last-child {
+    padding-bottom: 0;
+    border-bottom: 0;
+  }
+
+  .fact dt {
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    color: var(--color-highlight);
+  }
+
+  .fact dd {
+    margin: 0;
+  }
+
+  .photos,
+  .video {
+    display: grid;
+    gap: var(--space-6);
+  }
+
+  .photos h2,
+  .video h2 {
+    font-size: var(--text-2xl);
+  }
+
+  .photo-grid {
+    display: grid;
+    gap: var(--space-4);
+    padding: 0;
+  }
+
+  @media (min-width: 40em) {
+    .photo-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  .photo-grid {
+    align-items: start;
+  }
+
+  .photo {
+    width: 100%;
+    border-radius: var(--radius-md);
+  }
+
+  figure {
+    display: grid;
+    gap: var(--space-2);
+  }
+
+  figcaption {
+    max-width: var(--measure);
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+  }
+
+  .video-player {
+    width: 100%;
+    max-width: 36rem;
+    border-radius: var(--radius-md);
+    background-color: var(--color-surface);
+  }
+
+  .pager {
+    display: grid;
+    gap: var(--space-4);
+    padding-top: var(--space-8);
+    border-top: var(--border-width) solid var(--color-border);
+  }
+
+  @media (min-width: 40em) {
+    .pager {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .pager-link {
+    display: grid;
+    gap: var(--space-1);
+    padding: var(--space-4);
+    border-radius: var(--radius-md);
+    background-color: var(--color-surface);
+    color: var(--color-text);
+    text-decoration: none;
+  }
+
+  .pager-link:hover {
+    background-color: var(--color-surface-raised);
+  }
+
+  .pager-next {
+    text-align: end;
+    grid-column: -2;
+  }
+
+  .pager-label {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+  }
+
+  .pager-title {
+    font-family: var(--font-heading);
+    font-size: var(--text-lg);
+  }
+</style>

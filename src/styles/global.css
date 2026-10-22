@@ -58,6 +58,11 @@ p {
   text-wrap: pretty;
 }
 
+ul[role='list'],
+ol[role='list'] {
+  list-style: none;
+}
+
 img,
 picture,
 svg,
