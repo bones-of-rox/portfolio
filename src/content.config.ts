@@ -33,6 +33,7 @@ const made = defineCollection({
         .object({
           src: z.string(), // base name in public/made/<slug>/; needs both <name>.mp4 and <name>.webm
           poster: image(),
+          title: z.string().optional(), // shown as a heading above the video when set
           description: z.string().min(1, 'Describe what the video shows'),
         })
         .optional(),

@@ -17,7 +17,7 @@ Donovan sends photos (and sometimes a video), plus a dictated title, background,
 - Lead (cover) photo: Donovan prefers a wide, full-width lead image. Crop the best group or hero shot to 3:2 landscape, and keep the whole piece in frame.
 - Other photos are tiled below the story. Tall photos sit side by side as 4:5 tiles, and wide photos span the full row. The page has no visible "Photos" or video headings.
 - Gallery thumbnail: tiles are 4:5 portrait. If the cover photo doesn't crop well to 4:5, or Donovan picks a different image, make a 4:5 crop and set it as `thumbnail`. Trim black bars from phone screenshots.
-- Video: install `ffmpeg-static` in the scratchpad, not the project. Strip the audio when it's silent or not needed. Otherwise it needs captions. Scale to 720px wide at 30fps. Export both `public/made/<slug>/<name>.mp4` (H.264, CRF 26, `+faststart`) and `<name>.webm` (VP9, CRF 38). Save a poster frame as `src/content/made/<slug>/<name>-poster.jpg`.
+- Video: install `ffmpeg-static` in the scratchpad, not the project. Strip the audio when it's silent or not needed. Otherwise it needs captions. Scale to 720px wide at 30fps. Export both `public/made/<slug>/<name>.mp4` (H.264, CRF 26, `+faststart`) and `<name>.webm` (VP9, CRF 38). Save a poster frame as `src/content/made/<slug>/<name>-poster.jpg`. If Donovan names the video, set `video.title` and it shows as a heading above the video. Without a title, the video has no visible heading.
 
 ## 3. Write the entry
 Create `src/content/made/<slug>/index.md`. The fields are defined in `src/content.config.ts`, and `brain-trust-shot-glasses` is a complete example.

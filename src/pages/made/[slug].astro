@@ -108,7 +108,11 @@ const poster = video ? await getImage({ src: video.poster, width: 960, format: '
     {
       video && (
         <section class="video" aria-labelledby="video-heading">
-          <h2 id="video-heading" class="visually-hidden">Video</h2>
+          {video.title ? (
+            <h2 id="video-heading" class="video-title">{video.title}</h2>
+          ) : (
+            <h2 id="video-heading" class="visually-hidden">Video</h2>
+          )}
           <figure>
             <video
               controls
@@ -238,6 +242,11 @@ const poster = video ? await getImage({ src: video.poster, width: 960, format: '
 
   .video {
     display: grid;
+    gap: var(--space-4);
+  }
+
+  .video-title {
+    font-size: var(--text-2xl);
   }
 
   .photo-grid {

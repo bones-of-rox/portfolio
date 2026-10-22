@@ -15,6 +15,11 @@ photos:
     alt: A gray cat with white paws stretched up on his hind legs, clawing at the edge of a kitchen drawer above his scratching post.
   - src: ./scratched-drawer.jpg
     alt: An open kitchen drawer whose gray painted top edge is scratched and scuffed down to bare wood by cat claws.
+video:
+  src: first-prototype
+  poster: ./first-prototype-poster.jpg
+  title: Failed first prototype
+  description: A ten-second silent clip of a white, L-shaped first version of the cap being pressed onto the top corner of an open kitchen drawer.
 ---
 
 When my cat is hungry, he gets my attention by scratching the drawers in our kitchen, and the edges were starting to show it.
