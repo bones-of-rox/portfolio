@@ -29,14 +29,16 @@ const made = defineCollection({
       cover: photo, // lead photo on the detail page
       thumbnail: photo.optional(), // gallery tile (4:5); falls back to cover
       photos: z.array(photo).default([]),
-      video: z
-        .object({
-          src: z.string(), // base name in public/made/<slug>/; needs both <name>.mp4 and <name>.webm
-          poster: image(),
-          title: z.string().optional(), // shown as a heading above the video when set
-          description: z.string().min(1, 'Describe what the video shows'),
-        })
-        .optional(),
+      videos: z
+        .array(
+          z.object({
+            src: z.string(), // base name in public/made/<slug>/; needs both <name>.mp4 and <name>.webm
+            poster: image(),
+            title: z.string().optional(), // shown as a heading above the video when set
+            description: z.string().min(1, 'Describe what the video shows'),
+          }),
+        )
+        .default([]),
       draft: z.boolean().default(false),
     });
   },

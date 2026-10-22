@@ -18,10 +18,10 @@ photos:
     alt: Two of the shot glasses in front of a bottle of mezcal on a white kitchen counter, showing their small size.
   - src: ./campfire-setup.jpg
     alt: The finished glasses set out on a counter with bottles, snacks, and a lightbox sign that reads "Brain Trust Fall".
-video:
-  src: 3d-model
-  poster: ./3d-model-poster.jpg
-  description: A five-second silent clip of the shot glass's 3D model turning in modeling software, showing the faceted rim and the ribbed, flowing base.
+videos:
+  - src: 3d-model
+    poster: ./3d-model-poster.jpg
+    description: A five-second silent clip of the shot glass's 3D model turning in modeling software, showing the faceted rim and the ribbed, flowing base.
 ---
 
 Every year, a close group of friends and I get together for a weekend we call the Brain Trust. We sit around a campfire, talk about life, use chainsaws, and build things all weekend long.

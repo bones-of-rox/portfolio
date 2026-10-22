@@ -21,7 +21,7 @@ interface Props {
 }
 
 const { piece, newer, older } = Astro.props;
-const { title, summary, type, date, dateLabel, madeFor, materials, tools, size, cover, photos, video } =
+const { title, summary, type, date, dateLabel, madeFor, materials, tools, size, cover, photos, videos } =
   piece.data;
 const { Content } = await render(piece);
 
@@ -34,8 +34,13 @@ const facts = [
   { label: 'Size', value: size },
 ].filter((fact) => fact.value);
 
-const videoBase = video ? url(`/made/${piece.id}/${video.src}`) : undefined;
-const poster = video ? await getImage({ src: video.poster, width: 960, format: 'webp' }) : undefined;
+const videoList = await Promise.all(
+  videos.map(async (v) => ({
+    ...v,
+    base: url(`/made/${piece.id}/${v.src}`),
+    poster: await getImage({ src: v.poster, width: 960, format: 'webp' }),
+  })),
+);
 ---
 
 <BaseLayout title={title} description={summary}>
@@ -106,30 +111,34 @@ const poster = video ? await getImage({ src: video.poster, width: 960, format: '
     }
 
     {
-      video && (
-        <section class="video" aria-labelledby="video-heading">
-          {video.title ? (
-            <h2 id="video-heading" class="video-title">{video.title}</h2>
-          ) : (
-            <h2 id="video-heading" class="visually-hidden">Video</h2>
-          )}
-          <figure>
-            <video
-              controls
-              muted
-              loop
-              playsinline
-              preload="none"
-              poster={poster?.src}
-              class="video-player"
-              aria-describedby="video-description"
-            >
-              <source src={`${videoBase}.webm`} type="video/webm" />
-              <source src={`${videoBase}.mp4`} type="video/mp4" />
-            </video>
-            <figcaption id="video-description">{video.description}</figcaption>
-          </figure>
-        </section>
+      videoList.length > 0 && (
+        <div class="videos">
+          {videoList.map((v, i) => (
+            <section class="video" aria-labelledby={`video-heading-${i}`}>
+              {v.title ? (
+                <h2 id={`video-heading-${i}`} class="video-title">{v.title}</h2>
+              ) : (
+                <h2 id={`video-heading-${i}`} class="visually-hidden">Video</h2>
+              )}
+              <figure>
+                <video
+                  controls
+                  muted
+                  loop
+                  playsinline
+                  preload="none"
+                  poster={v.poster.src}
+                  class="video-player"
+                  aria-describedby={`video-description-${i}`}
+                >
+                  <source src={`${v.base}.webm`} type="video/webm" />
+                  <source src={`${v.base}.mp4`} type="video/mp4" />
+                </video>
+                <figcaption id={`video-description-${i}`}>{v.description}</figcaption>
+              </figure>
+            </section>
+          ))}
+        </div>
       )
     }
 
@@ -240,9 +249,21 @@ const poster = video ? await getImage({ src: video.poster, width: 960, format: '
     margin: 0;
   }
 
+  .videos {
+    display: grid;
+    gap: var(--space-10) var(--space-6);
+  }
+
+  @media (min-width: 40em) {
+    .videos {
+      grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+    }
+  }
+
   .video {
     display: grid;
     gap: var(--space-4);
+    align-content: start;
   }
 
   .video-title {
