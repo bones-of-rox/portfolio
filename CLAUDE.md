@@ -23,7 +23,7 @@ Personal portfolio for Donovan, a UX designer and UX leader. Sections: UX case s
 - Hosted on GitHub Pages and deployed by `.github/workflows/deploy.yml` on every push to `main`.
 - Domain: donovanpreddy.com, to be connected at launch (stage 7).
 - Design tokens live in `src/styles/tokens.css`. Base styles are in `src/styles/global.css`, and the page frame is `src/layouts/BaseLayout.astro`. The `/style-guide/` page shows every token.
-- Look: dark grays, with an orange accent for buttons, links, and focus, and a teal highlight for small labels. Fraunces (serif) for headings, Inter (sans) for body text.
+- Look: dark grays, with an orange accent for buttons, links, and focus, and a teal highlight for small labels. Inter (sans) for page titles (h1) and body text, Fraunces (serif) for section headings (h2 to h4) and the site name.
 - Commands: `npm run dev` for a local preview, `npm run build` for a production build.
 
 ## Plan
