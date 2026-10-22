@@ -3,6 +3,11 @@ import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
 import { url } from '../utils';
 
+// Chalk sketches made by scripts/make-sketches.mjs (one per piece folder)
+const sketches = import.meta.glob<{ default: ImageMetadata }>('/src/content/made/*/sketch.jpg', {
+  eager: true,
+});
+
 interface Props {
   piece: CollectionEntry<'made'>;
 }
@@ -10,17 +15,24 @@ interface Props {
 const { piece } = Astro.props;
 const { title, type, dateLabel, date, cover, thumbnail } = piece.data;
 const when = dateLabel ?? String(date.getFullYear());
+const sketch = sketches[`/src/content/made/${piece.id}/sketch.jpg`]?.default;
+const sizes = '(min-width: 64em) 22rem, (min-width: 40em) 33vw, 50vw';
 ---
 
 <li class="card">
   <a class="card-link" href={url(`/made/${piece.id}/`)}>
     <div class="card-media">
+      {
+        sketch && (
+          <Image src={sketch} alt="" widths={[320, 480, 640]} sizes={sizes} class="card-image card-sketch" />
+        )
+      }
       <Image
         src={(thumbnail ?? cover).src}
         alt=""
         widths={[320, 480, 640, 960]}
-        sizes="(min-width: 64em) 22rem, (min-width: 40em) 33vw, 50vw"
-        class="card-image"
+        sizes={sizes}
+        class:list={['card-image', 'card-photo', { 'has-sketch': sketch }]}
       />
     </div>
     <span class="card-title">{title}</span>
@@ -38,6 +50,7 @@ const when = dateLabel ?? String(date.getFullYear());
   }
 
   .card-media {
+    display: grid;
     aspect-ratio: 4 / 5;
     overflow: hidden;
     margin-bottom: var(--space-2);
@@ -45,13 +58,20 @@ const when = dateLabel ?? String(date.getFullYear());
     background-color: var(--color-surface);
   }
 
+  /* Sketch and photo are stacked in the same grid cell */
   .card-image {
+    grid-area: 1 / 1;
     width: 100%;
     height: 100%;
     object-fit: cover;
     transition:
       transform var(--duration-medium) var(--ease-out),
-      filter var(--duration-medium) var(--ease-out);
+      opacity var(--duration-medium) var(--ease-out);
+  }
+
+  /* With a sketch, the photo stays hidden until hover or focus */
+  .card-photo.has-sketch {
+    opacity: 0;
   }
 
   .card-title {
@@ -75,7 +95,11 @@ const when = dateLabel ?? String(date.getFullYear());
   .card-link:hover .card-image,
   .card-link:focus-visible .card-image {
     transform: scale(var(--hover-zoom));
-    filter: brightness(var(--hover-dim));
+  }
+
+  .card-link:hover .card-photo,
+  .card-link:focus-visible .card-photo {
+    opacity: 1;
   }
 
   .card-link:hover .card-title,

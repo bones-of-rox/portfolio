@@ -19,6 +19,8 @@ Donovan sends photos (and sometimes a video), plus a dictated title, background,
 - Gallery thumbnail: tiles are 4:5 portrait. If the cover photo doesn't crop well to 4:5, or Donovan picks a different image, make a 4:5 crop and set it as `thumbnail`. Trim black bars from phone screenshots.
 - Video: install `ffmpeg-static` in the scratchpad, not the project. Strip the audio when it's silent or not needed. Otherwise it needs captions. Scale to 720px wide at 30fps. Export both `public/made/<slug>/<name>.mp4` (H.264, CRF 26, `+faststart`) and `<name>.webm` (VP9, CRF 38). Save a poster frame as `src/content/made/<slug>/<name>-poster.jpg`. If Donovan names the video, set `video.title` and it shows as a heading above the video. Without a title, the video has no visible heading.
 
+- Chalk sketch: the gallery tile shows a chalk-sketch version that fades to the photo on hover. `scripts/make-sketches.mjs` makes `sketch.jpg` from the thumbnail (or cover) automatically before every build, so there's nothing to do by hand. Commit the generated `sketch.jpg`.
+
 ## 3. Write the entry
 Create `src/content/made/<slug>/index.md`. The fields are defined in `src/content.config.ts`, and `brain-trust-shot-glasses` is a complete example.
 - `title`, `summary` (one line), `type` (`3D print`, `Furniture`, or `Other`), `date` (an approximate date is fine, since it's used for sorting) and `dateLabel` (e.g. "Fall 2025").

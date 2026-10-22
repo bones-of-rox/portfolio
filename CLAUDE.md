@@ -24,6 +24,7 @@ Personal portfolio for Donovan, a UX designer and UX leader. Sections: UX case s
 - Domain: donovanpreddy.com, to be connected at launch (stage 7).
 - Design tokens live in `src/styles/tokens.css`. Base styles are in `src/styles/global.css`, and the page frame is `src/layouts/BaseLayout.astro`. The `/style-guide/` page shows every token.
 - Look: dark grays, with an orange accent for buttons, links, and focus, and a teal highlight for small labels. Fraunces (serif) for headings, Inter (sans) for body text.
+- Made gallery tiles show a chalk sketch (light lines on near-black) that fades to the real photo on hover or focus. `scripts/make-sketches.mjs` generates the sketches and runs before `dev` and `build`.
 - Commands: `npm run dev` for a local preview, `npm run build` for a production build.
 
 ## Plan
