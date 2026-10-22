@@ -6,14 +6,14 @@ date: 2025-10-01
 dateLabel: Fall 2025
 madeFor: The Brain Trust
 cover:
-  src: ./single-glass.jpg
-  alt: A single black 3D-printed shot glass on a wooden table. Its rim has many flat facets, and smooth ribs flow down the sides into a narrower, rippled base.
+  src: ./four-glasses-wide.jpg
+  alt: Four black 3D-printed shot glasses lined up on a gold-flecked counter in low light, which catches the ribs flowing down each glass.
 thumbnail:
   src: ./3d-model-thumbnail.jpg
   alt: The 3D model of the shot glass shown as a see-through wireframe, with a faceted rim and long ribs flowing down to the base.
 photos:
-  - src: ./four-glasses.jpg
-    alt: Four of the black shot glasses lined up in low light, which catches the ridges running down each glass.
+  - src: ./single-glass.jpg
+    alt: A single black shot glass on a wooden table. Its rim has many flat facets, and smooth ribs flow down the sides into a narrower, rippled base.
   - src: ./pair-with-mezcal.jpg
     alt: Two of the shot glasses in front of a bottle of mezcal on a white kitchen counter, showing their small size.
   - src: ./campfire-setup.jpg

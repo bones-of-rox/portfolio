@@ -84,10 +84,10 @@ const poster = video ? await getImage({ src: video.poster, width: 960, format: '
     {
       photos.length > 0 && (
         <section class="photos" aria-labelledby="photos-heading">
-          <h2 id="photos-heading">Photos</h2>
+          <h2 id="photos-heading" class="visually-hidden">Photos</h2>
           <ul class="photo-grid" role="list">
             {photos.map((photo) => (
-              <li>
+              <li class={photo.src.width > photo.src.height ? 'tile tile-wide' : 'tile'}>
                 <figure>
                   <Image
                     src={photo.src}
@@ -108,7 +108,7 @@ const poster = video ? await getImage({ src: video.poster, width: 960, format: '
     {
       video && (
         <section class="video" aria-labelledby="video-heading">
-          <h2 id="video-heading">The 3D model</h2>
+          <h2 id="video-heading" class="visually-hidden">Video</h2>
           <figure>
             <video
               controls
@@ -172,11 +172,8 @@ const poster = video ? await getImage({ src: video.poster, width: 960, format: '
     gap: var(--space-4);
   }
 
-  /* Show the whole photo at its own shape, never cropped */
   .piece-cover {
-    width: auto;
-    max-width: 100%;
-    max-height: 80vh;
+    width: 100%;
     border-radius: var(--radius-lg);
   }
 
@@ -239,15 +236,8 @@ const poster = video ? await getImage({ src: video.poster, width: 960, format: '
     margin: 0;
   }
 
-  .photos,
   .video {
     display: grid;
-    gap: var(--space-6);
-  }
-
-  .photos h2,
-  .video h2 {
-    font-size: var(--text-2xl);
   }
 
   .photo-grid {
@@ -262,13 +252,21 @@ const poster = video ? await getImage({ src: video.poster, width: 960, format: '
     }
   }
 
-  .photo-grid {
-    align-items: start;
-  }
-
+  /* Tiles: tall photos sit side by side as 4:5 tiles, wide photos span the row */
   .photo {
     width: 100%;
     border-radius: var(--radius-md);
+  }
+
+  .tile:not(.tile-wide) .photo {
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+  }
+
+  @media (min-width: 40em) {
+    .tile-wide {
+      grid-column: 1 / -1;
+    }
   }
 
   figure {
