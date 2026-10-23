@@ -1,0 +1,58 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import MadeCard from '../../components/MadeCard.astro';
+
+const pieces = (await getCollection('made', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
+---
+
+<BaseLayout
+  title="Le Fab Lab"
+  description="3D-printed products and furniture made by Donovan Preddy."
+>
+  <div class="container made">
+    <header class="made-intro">
+      <h1>Le Fab Lab</h1>
+      <p class="lead">Things I design and build away from the screen: 3D-printed products and furniture.</p>
+    </header>
+
+    <ul class="grid" role="list">
+      {pieces.map((piece) => <MadeCard piece={piece} />)}
+    </ul>
+  </div>
+</BaseLayout>
+
+<style>
+  .made {
+    display: grid;
+    gap: var(--space-10);
+    padding-top: var(--space-section);
+  }
+
+  .made-intro {
+    display: grid;
+    gap: var(--space-4);
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-8) var(--space-4);
+    padding: 0;
+  }
+
+  @media (min-width: 40em) {
+    .grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: var(--space-10) var(--space-6);
+    }
+  }
+
+  @media (min-width: 64em) {
+    .grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+</style>
