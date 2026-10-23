@@ -27,3 +27,5 @@ photos:
 ---
 
 To honor the Greek tradition for my wife, I made a set of custom wedding crowns for her and me to wear. They were part of a traditional Greek ceremony.
+
+I also built a custom case for the crowns.
