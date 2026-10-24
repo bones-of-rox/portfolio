@@ -20,6 +20,8 @@ photos:
     alt: The couple seen from behind on a bench, wearing the linked crowns, facing seated guests and a man speaking with his arms raised.
   - src: ./crowns-on-table.jpg
     alt: The two crowns on a wooden table. Each is a thin white band with a gentle wave in it, joined by a gathered sheer ribbon.
+  - src: ./green-crown.jpg
+    alt: A single crown band printed in bright green plastic, lying on a wooden desk. It has the same thin band and gentle wave as the finished white crowns.
   - src: ./keepsake-case-parts.jpg
     alt: The parts of a light-blue 3D-printed keepsake case laid out from above. On the left is the lid, in the middle is a tray with circular grooves, and on the right are the two crowns held together by a clip.
   - src: ./keepsake-case-open.jpg
