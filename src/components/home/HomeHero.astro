@@ -1,0 +1,69 @@
+---
+import { url } from '../../utils';
+---
+
+<section class="container hero" aria-labelledby="hero-heading">
+  <div class="hero-text">
+    <p class="eyebrow">UX designer and UX leader</p>
+    <h1 id="hero-heading">Donovan Preddy</h1>
+    <p class="lead">
+      Placeholder intro: a sentence or two about who I am, the teams I lead, and the kinds of problems I
+      love to solve.
+    </p>
+    <div class="actions">
+      <a class="button button-primary" href={url('/work/')}>See my work</a>
+      <a class="button button-secondary" href={url('/fab-lab/')}>See what I've made</a>
+    </div>
+  </div>
+
+  <!-- Placeholder until the real photo arrives -->
+  <div class="hero-image">
+    <span>Image placeholder</span>
+  </div>
+</section>
+
+<style>
+  .hero {
+    display: grid;
+    gap: var(--space-8);
+    padding-block: var(--space-section);
+  }
+
+  .hero-text {
+    display: grid;
+    gap: var(--space-4);
+    align-content: center;
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    margin-top: var(--space-4);
+  }
+
+  /* On phones the image sits above the text */
+  .hero-image {
+    order: -1;
+    display: grid;
+    place-items: center;
+    aspect-ratio: 4 / 3;
+    border: var(--border-width) dashed var(--color-border-strong);
+    border-radius: var(--radius-lg);
+    background-color: var(--color-surface-raised);
+    color: var(--color-text-muted);
+    font-size: var(--text-sm);
+  }
+
+  @media (min-width: 64em) {
+    .hero {
+      grid-template-columns: 3fr 2fr;
+      gap: var(--space-16);
+    }
+
+    .hero-image {
+      order: 0;
+      aspect-ratio: 4 / 5;
+    }
+  }
+</style>

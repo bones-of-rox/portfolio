@@ -1,0 +1,159 @@
+---
+import { getCollection } from 'astro:content';
+import MadeCard from '../MadeCard.astro';
+import { url } from '../../utils';
+
+const pieces = (await getCollection('made', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
+---
+
+<section class="fab-lab" aria-labelledby="fab-lab-heading" data-carousel>
+  <div class="container">
+    <div class="section-head">
+      <div class="section-title">
+        <h2 id="fab-lab-heading">Le Fab Lab</h2>
+        <p class="lead">Things I design and build away from the screen.</p>
+      </div>
+      <div class="controls">
+        <button type="button" class="arrow" data-prev aria-controls="fab-lab-track">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15 5l-7 7 7 7"></path></svg>
+          <span class="visually-hidden">Previous pieces</span>
+        </button>
+        <button type="button" class="arrow" data-next aria-controls="fab-lab-track">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 5l7 7-7 7"></path></svg>
+          <span class="visually-hidden">Next pieces</span>
+        </button>
+      </div>
+    </div>
+
+    <ul class="track" id="fab-lab-track" role="list" data-track>
+      {pieces.map((piece) => <MadeCard piece={piece} />)}
+    </ul>
+
+    <p class="see-all"><a href={url('/fab-lab/')}>See all of Le Fab Lab</a></p>
+  </div>
+</section>
+
+<style>
+  .fab-lab {
+    padding-block: var(--space-section);
+  }
+
+  .section-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: end;
+    justify-content: space-between;
+    gap: var(--space-4);
+    margin-bottom: var(--space-6);
+  }
+
+  .section-title {
+    display: grid;
+    gap: var(--space-2);
+  }
+
+  .controls {
+    display: flex;
+    gap: var(--space-2);
+  }
+
+  .arrow {
+    display: inline-grid;
+    place-items: center;
+    min-width: var(--target-min);
+    min-height: var(--target-min);
+    padding: 0;
+    border: var(--border-width) solid var(--color-border-strong);
+    border-radius: var(--radius-pill);
+    background-color: transparent;
+    color: var(--color-text);
+    cursor: pointer;
+    transition:
+      border-color var(--duration-fast),
+      color var(--duration-fast);
+  }
+
+  .arrow svg {
+    width: var(--space-5);
+    height: var(--space-5);
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .arrow:hover:not([aria-disabled='true']) {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+  }
+
+  .arrow[aria-disabled='true'] {
+    opacity: 0.4;
+    cursor: default;
+  }
+
+  /* The row of tiles: swipe on phones, arrows or Tab on computers */
+  .track {
+    display: flex;
+    gap: var(--space-4);
+    margin: 0;
+    padding: calc(var(--focus-width) + var(--focus-offset));
+    margin-inline: calc(-1 * (var(--focus-width) + var(--focus-offset)));
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: calc(var(--focus-width) + var(--focus-offset));
+    scrollbar-width: none;
+  }
+
+  .track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .track > :global(li) {
+    flex: 0 0 var(--carousel-tile);
+    scroll-snap-align: start;
+  }
+
+  @media (min-width: 40em) {
+    .track {
+      gap: var(--space-6);
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .track {
+      scroll-behavior: smooth;
+    }
+  }
+
+  .see-all {
+    margin-top: var(--space-6);
+  }
+</style>
+
+<script>
+  // Arrow buttons scroll the row by about one screenful. At either end the button is
+  // marked unavailable (aria-disabled) rather than disabled, so keyboard focus isn't lost.
+  for (const carousel of document.querySelectorAll<HTMLElement>('[data-carousel]')) {
+    const track = carousel.querySelector<HTMLElement>('[data-track]')!;
+    const prev = carousel.querySelector<HTMLButtonElement>('[data-prev]')!;
+    const next = carousel.querySelector<HTMLButtonElement>('[data-next]')!;
+
+    const update = () => {
+      const max = track.scrollWidth - track.clientWidth - 1;
+      prev.setAttribute('aria-disabled', String(track.scrollLeft <= 0));
+      next.setAttribute('aria-disabled', String(track.scrollLeft >= max));
+    };
+
+    const step = () => track.clientWidth * 0.8;
+    prev.addEventListener('click', () => track.scrollBy({ left: -step() }));
+    next.addEventListener('click', () => track.scrollBy({ left: step() }));
+    track.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    update();
+  }
+</script>

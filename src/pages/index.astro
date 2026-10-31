@@ -1,31 +1,12 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { url } from '../utils';
+import HomeHero from '../components/home/HomeHero.astro';
+import FabLabCarousel from '../components/home/FabLabCarousel.astro';
+import BrandStrip from '../components/home/BrandStrip.astro';
 ---
 
 <BaseLayout>
-  <section class="container intro">
-    <p class="eyebrow">UX designer and UX leader</p>
-    <h1>Donovan Preddy</h1>
-    <p class="lead">My portfolio is on its way: case studies, things I've made, and a little about me.</p>
-    <div class="actions">
-      <a class="button button-primary" href={url('/work/')}>See my work</a>
-      <a class="button button-secondary" href={url('/fab-lab/')}>See what I've made</a>
-    </div>
-  </section>
+  <HomeHero />
+  <FabLabCarousel />
+  <BrandStrip />
 </BaseLayout>
-
-<style>
-  .intro {
-    display: grid;
-    gap: var(--space-4);
-    padding-block: var(--space-section);
-  }
-
-  .actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-3);
-    margin-top: var(--space-4);
-  }
-</style>
