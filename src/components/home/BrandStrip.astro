@@ -16,7 +16,7 @@ const sized = brands.map((brand) => ({
 
   <!--
     A sideways row people can swipe, drag, or move with the arrow keys.
-    Scrolling down the page also nudges it gently left to right.
+    Scrolling down the page also nudges it gently: logos enter from the right and travel left.
   -->
   <div class="viewport" role="region" aria-label="Brand logos (scrolls sideways)" tabindex="0" data-viewport>
     <ul class="logos" role="list">
@@ -102,10 +102,6 @@ const sized = brands.map((brand) => ({
 
   for (const strip of document.querySelectorAll<HTMLElement>('[data-brand-strip]')) {
     const viewport = strip.querySelector<HTMLElement>('[data-viewport]')!;
-    const maxScroll = () => viewport.scrollWidth - viewport.clientWidth;
-
-    // Start at the right end, so scrolling down pans the logos left to right.
-    viewport.scrollLeft = maxScroll();
 
     // Page scroll nudges the row from wherever it is now (including after a swipe).
     let lastY = window.scrollY;
@@ -122,7 +118,7 @@ const sized = brands.map((brand) => ({
           if (reduced.matches || dragging) return;
           const box = strip.getBoundingClientRect();
           if (box.bottom < 0 || box.top > window.innerHeight) return;
-          viewport.scrollLeft -= delta * PAN_SPEED;
+          viewport.scrollLeft += delta * PAN_SPEED; // down = logos move left
         });
       },
       { passive: true },
