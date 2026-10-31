@@ -103,7 +103,7 @@
   --duration-marquee: 45s; /* one full loop of the brands strip */
 
   /* ---------- Homepage ---------- */
-  --brand-logo-size: 3.5rem; /* logos are sized to roughly equal area around this */
+  --brand-logo-size: 7rem; /* logos are sized to roughly equal area around this */
   /* Tile width in the Le Fab Lab carousel: a part-tile peeks in to show it scrolls */
   --carousel-tile: calc((100% - 2 * var(--space-4)) / 2.3);
 }
@@ -111,7 +111,7 @@
 @media (min-width: 40em) {
   :root {
     --gutter: var(--space-8);
-    --brand-logo-size: 4.5rem;
+    --brand-logo-size: 9rem;
     --carousel-tile: calc((100% - 2 * var(--space-6)) / 3.3);
   }
 }
