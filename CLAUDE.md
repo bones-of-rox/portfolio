@@ -1,6 +1,6 @@
 # Donovan Preddy portfolio
 
-Personal portfolio for Donovan, a UX designer and UX leader. Sections: UX case studies (some leadership-focused), a gallery of 3D-printed products and furniture, shown on the site as "3D" at /fab-lab/ (renamed from "Le Fab Lab" on 2026-10-31) (internally still the "Made" collection; old /made/ links redirect there), and About.
+Personal portfolio for Donovan, a UX designer and UX leader. Sections: UX case studies (some leadership-focused), a gallery of 3D-printed products and furniture, shown on the site as "3D" at /3d/ (renamed from "Le Fab Lab" on 2026-10-31; internally still the "Made" collection; old /made/ and /fab-lab/ links redirect there), and About.
 
 ## Working with Donovan
 

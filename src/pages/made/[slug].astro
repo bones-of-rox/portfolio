@@ -1,5 +1,5 @@
 ---
-// The gallery moved to /fab-lab/. This keeps old shared links to each piece working.
+// The gallery moved to /3d/ (it was /made/, then /fab-lab/). This keeps old shared links to each piece working.
 import { getCollection } from 'astro:content';
 import { url } from '../../utils';
 
@@ -8,5 +8,5 @@ export async function getStaticPaths() {
   return pieces.map((piece) => ({ params: { slug: piece.id } }));
 }
 
-return Astro.redirect(url(`/fab-lab/${Astro.params.slug}/`), 301);
+return Astro.redirect(url(`/3d/${Astro.params.slug}/`), 301);
 ---
