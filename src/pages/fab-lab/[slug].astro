@@ -46,7 +46,7 @@ const videoList = await Promise.all(
 <BaseLayout title={title} description={summary}>
   <article class="container piece">
     <a class="back-link" href={url('/fab-lab/')}>
-      <span aria-hidden="true">←</span> Back to Le Fab Lab
+      <span aria-hidden="true">←</span> Back to 3D
     </a>
 
     <header class="piece-header">
@@ -143,7 +143,7 @@ const videoList = await Promise.all(
 
     {
       (newer || older) && (
-        <nav class="pager" aria-label="More Le Fab Lab pieces">
+        <nav class="pager" aria-label="More 3D projects">
           {older && (
             <a class="pager-link" href={url(`/fab-lab/${older.id}/`)}>
               <span class="pager-label">Previous</span>

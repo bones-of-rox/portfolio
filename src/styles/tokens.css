@@ -103,7 +103,7 @@
 
   /* ---------- Homepage ---------- */
   --brand-logo-size: 7rem; /* logos are sized to roughly equal area around this */
-  /* Tile width in the Le Fab Lab carousel: a part-tile peeks in to show it scrolls */
+  /* Tile width in the 3D carousel: a part-tile peeks in to show it scrolls */
   --carousel-tile: calc((100% - 2 * var(--space-4)) / 2.3);
 }
 

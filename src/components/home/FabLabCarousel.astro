@@ -12,8 +12,8 @@ const pieces = (await getCollection('made', ({ data }) => !data.draft)).sort(
   <div class="container">
     <div class="section-head">
       <div class="section-title">
-        <h2 id="fab-lab-heading">Le Fab Lab</h2>
-        <p class="lead">Things I design and build away from the screen.</p>
+        <h2 id="fab-lab-heading">3D</h2>
+        <p class="lead">Things I design and build that can be touched and held.</p>
       </div>
       <div class="controls">
         <button type="button" class="arrow" data-prev aria-controls="fab-lab-track">
@@ -31,7 +31,7 @@ const pieces = (await getCollection('made', ({ data }) => !data.draft)).sort(
       {pieces.map((piece) => <MadeCard piece={piece} />)}
     </ul>
 
-    <p class="see-all"><a href={url('/fab-lab/')}>See all of Le Fab Lab</a></p>
+    <p class="see-all"><a href={url('/fab-lab/')}>See all 3D projects</a></p>
   </div>
 </section>
 
