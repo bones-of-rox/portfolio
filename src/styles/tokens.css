@@ -100,7 +100,6 @@
   --duration-medium: 350ms;
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --hover-zoom: 1.05;
-  --duration-marquee: 45s; /* one full loop of the brands strip */
 
   /* ---------- Homepage ---------- */
   --brand-logo-size: 7rem; /* logos are sized to roughly equal area around this */
