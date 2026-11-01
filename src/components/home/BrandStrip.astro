@@ -9,34 +9,43 @@ const sized = brands.map((brand) => ({
 }));
 ---
 
-<section class="brands" aria-labelledby="brands-heading" data-brand-strip>
-  <div class="container">
+<section class="brands" aria-labelledby="brands-heading" data-marquee>
+  <div class="container brands-head">
     <h2 id="brands-heading">Brands I've worked with</h2>
+    <button type="button" class="toggle" data-toggle hidden>
+      <svg class="icon-pause" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path d="M8 5v14M16 5v14"></path>
+      </svg>
+      <svg class="icon-play" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path d="M7 4l13 8-13 8z"></path>
+      </svg>
+      <span data-label>Pause</span>
+      <span class="visually-hidden"> brand logos</span>
+    </button>
   </div>
 
-  <!--
-    A sideways row people can swipe, drag, or move with the arrow keys.
-    Scrolling down the page also nudges it gently: logos enter from the right and travel left.
-  -->
-  <div class="viewport" role="region" aria-label="Brand logos (scrolls sideways)" tabindex="0" data-viewport>
-    <ul class="logos" role="list">
-      {
-        sized.map(({ name, logo, scale }) => (
-          <li>
-            <img
-              src={logo.src}
-              alt={name}
-              width={logo.width}
-              height={logo.height}
-              style={`--logo-scale: ${scale}`}
-              loading="lazy"
-              decoding="async"
-              draggable="false"
-            />
-          </li>
-        ))
-      }
-    </ul>
+  <div class="viewport">
+    <div class="track">
+      <ul class="logos" role="list">
+        {
+          sized.map(({ name, logo, scale }) => (
+            <li>
+              <img src={logo.src} alt={name} width={logo.width} height={logo.height} style={`--logo-scale: ${scale}`} loading="lazy" decoding="async" />
+            </li>
+          ))
+        }
+      </ul>
+      <!-- A second copy makes the loop seamless. Screen readers skip it. -->
+      <ul class="logos logos-copy" role="list" aria-hidden="true">
+        {
+          sized.map(({ logo, scale }) => (
+            <li>
+              <img src={logo.src} alt="" width={logo.width} height={logo.height} style={`--logo-scale: ${scale}`} loading="lazy" decoding="async" />
+            </li>
+          ))
+        }
+      </ul>
+    </div>
   </div>
 </section>
 
@@ -45,48 +54,86 @@ const sized = brands.map((brand) => ({
     padding-block: var(--space-section);
   }
 
-  h2 {
+  .brands-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
     margin-bottom: var(--space-10);
   }
 
-  /* Faded edges hint that there's more to see on either side */
-  .viewport {
-    overflow-x: auto;
-    overscroll-behavior-x: contain;
-    scrollbar-width: none;
-    mask-image: linear-gradient(to right, transparent, black var(--space-16), black calc(100% - var(--space-16)), transparent);
+  .toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    min-height: var(--target-min);
+    padding-inline: var(--space-4);
+    border: var(--border-width) solid var(--color-border-strong);
+    border-radius: var(--radius-pill);
+    background-color: transparent;
+    color: var(--color-text);
+    font: inherit;
+    font-size: var(--text-sm);
+    cursor: pointer;
+    transition:
+      border-color var(--duration-fast),
+      color var(--duration-fast);
   }
 
-  .viewport::-webkit-scrollbar {
+  .toggle[hidden] {
     display: none;
   }
 
-  .viewport:focus-visible {
-    outline: var(--focus-width) solid var(--color-focus);
-    outline-offset: calc(-1 * var(--focus-width));
-    mask-image: none;
+  .toggle:hover {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
   }
 
-  @media (pointer: fine) {
-    .viewport {
-      cursor: grab;
-    }
+  .toggle svg {
+    width: var(--space-4);
+    height: var(--space-4);
+    stroke: currentColor;
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
 
-    .viewport.is-dragging {
-      cursor: grabbing;
-      user-select: none;
-    }
+  .icon-play {
+    display: none;
+    fill: currentColor;
+  }
+
+  .icon-pause {
+    fill: none;
+  }
+
+  .is-paused .icon-play {
+    display: block;
+  }
+
+  .is-paused .icon-pause {
+    display: none;
+  }
+
+  /* Without the script (or with reduced motion) the logos sit still in wrapped rows */
+  .track {
+    display: flex;
   }
 
   .logos {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
-    gap: var(--space-16);
-    width: max-content;
+    justify-content: center;
+    gap: var(--space-10) var(--space-12);
+    width: 100%;
     margin: 0;
-    padding-block: var(--space-4);
-    /* Room past the faded edges, so the first and last logos can show in full */
-    padding-inline: calc(var(--gutter) + var(--space-16));
+    padding-inline: var(--gutter);
+  }
+
+  .logos-copy {
+    display: none;
   }
 
   .logos img {
@@ -94,57 +141,68 @@ const sized = brands.map((brand) => ({
     width: calc(var(--brand-logo-size) * var(--logo-scale));
     height: auto;
   }
+
+  /* Moving version: one long row drifting left, faded at the edges */
+  .is-moving .viewport {
+    overflow: hidden;
+    mask-image: linear-gradient(to right, transparent, black var(--space-16), black calc(100% - var(--space-16)), transparent);
+  }
+
+  .is-moving .track {
+    width: max-content;
+    animation: drift var(--duration-marquee) linear infinite;
+  }
+
+  .is-moving .logos {
+    flex-wrap: nowrap;
+    width: auto;
+    padding-inline: 0 var(--space-16);
+    gap: var(--space-16);
+  }
+
+  .is-moving .logos-copy {
+    display: flex;
+  }
+
+  /* Paused by the button, or while the pointer rests on it */
+  .is-moving.is-paused .track,
+  .is-moving .viewport:hover .track {
+    animation-play-state: paused;
+  }
+
+  @keyframes drift {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .is-moving .track {
+      animation: none;
+    }
+  }
 </style>
 
 <script>
+  // Starts the drift only when the visitor hasn't asked for reduced motion,
+  // and shows the Pause / Play button (WCAG 2.2.2: moving content can be paused).
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
-  const PAN_SPEED = 0.5; // the row moves half as far as the page scrolls
 
-  for (const strip of document.querySelectorAll<HTMLElement>('[data-brand-strip]')) {
-    const viewport = strip.querySelector<HTMLElement>('[data-viewport]')!;
+  for (const strip of document.querySelectorAll<HTMLElement>('[data-marquee]')) {
+    const toggle = strip.querySelector<HTMLButtonElement>('[data-toggle]')!;
+    const label = toggle.querySelector<HTMLElement>('[data-label]')!;
 
-    // Page scroll nudges the row from wherever it is now (including after a swipe).
-    let lastY = window.scrollY;
-    let ticking = false;
-    window.addEventListener(
-      'scroll',
-      () => {
-        if (ticking) return;
-        ticking = true;
-        requestAnimationFrame(() => {
-          const delta = window.scrollY - lastY;
-          lastY = window.scrollY;
-          ticking = false;
-          if (reduced.matches || dragging) return;
-          const box = strip.getBoundingClientRect();
-          if (box.bottom < 0 || box.top > window.innerHeight) return;
-          viewport.scrollLeft += delta * PAN_SPEED; // down = logos move left
-        });
-      },
-      { passive: true },
-    );
-
-    // Click and drag with a mouse (touch screens swipe natively).
-    let dragging = false;
-    let startX = 0;
-    let startScroll = 0;
-    viewport.addEventListener('pointerdown', (event) => {
-      if (event.pointerType !== 'mouse' || event.button !== 0) return;
-      dragging = true;
-      startX = event.clientX;
-      startScroll = viewport.scrollLeft;
-      viewport.setPointerCapture(event.pointerId);
-      viewport.classList.add('is-dragging');
-    });
-    viewport.addEventListener('pointermove', (event) => {
-      if (!dragging) return;
-      viewport.scrollLeft = startScroll - (event.clientX - startX);
-    });
-    const stop = () => {
-      dragging = false;
-      viewport.classList.remove('is-dragging');
+    const apply = () => {
+      strip.classList.toggle('is-moving', !reduced.matches);
+      toggle.hidden = reduced.matches;
     };
-    viewport.addEventListener('pointerup', stop);
-    viewport.addEventListener('pointercancel', stop);
+
+    toggle.addEventListener('click', () => {
+      const paused = strip.classList.toggle('is-paused');
+      label.textContent = paused ? 'Play' : 'Pause';
+    });
+
+    reduced.addEventListener('change', apply);
+    apply();
   }
 </script>
