@@ -33,6 +33,36 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/*
+  Fixed wood background: two layers pinned to the screen, so the page content
+  scrolls over them and they never move. (background-attachment: fixed would be
+  simpler, but iPhone Safari ignores it.)
+  ::before is the stained wood. ::after is charcoal, and fades in as the visitor
+  scrolls toward the bottom of the page (--scroll-progress is set by a script).
+*/
+body::before,
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+body::before {
+  background-color: var(--color-bg);
+  background-image:
+    linear-gradient(rgb(0 0 0 / var(--bg-wood-darken)), rgb(0 0 0 / var(--bg-wood-darken))),
+    var(--texture-wood);
+  background-size: cover;
+  background-position: center top;
+}
+
+body::after {
+  background-color: var(--color-bg-fade);
+  opacity: var(--scroll-progress, 0);
+}
+
 main {
   flex: 1;
 }

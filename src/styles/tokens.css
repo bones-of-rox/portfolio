@@ -21,11 +21,13 @@
   --orange-400: #ff8552;
   --orange-300: #ffa07a;
   --teal-300: #5fd4c4;
+  --charcoal-900: #202023; /* where the wood background fades to */
 
   /* ---------- Color: semantic ----------
      Contrast against --color-bg (WCAG 2.2 AA needs 4.5:1 for text, 3:1 for UI):
      text 15.7, text-muted 7.9, accent 7.6, highlight 10.2, border-strong 3.6 */
   --color-bg: var(--gray-950);
+  --color-bg-fade: var(--charcoal-900);
   --color-surface: var(--gray-900);
   --color-surface-raised: var(--gray-800);
   --color-border: var(--gray-700);
@@ -101,6 +103,11 @@
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --hover-zoom: 1.05;
   --duration-marquee: 60s; /* one full loop of the brands strip: slow on purpose */
+
+  /* ---------- Page background ----------
+     --texture-wood (the stained-wood photo) is set in BaseLayout, because
+     its address depends on the site's base path. */
+  --bg-wood-darken: 0.25; /* extra black over the wood so text keeps AA contrast */
 
   /* ---------- Homepage ---------- */
   --brand-logo-size: 7rem; /* logos are sized to roughly equal area around this */
