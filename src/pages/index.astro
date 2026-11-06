@@ -1,12 +1,21 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import HomeHero from '../components/home/HomeHero.astro';
-import FabLabCarousel from '../components/home/FabLabCarousel.astro';
-import BrandStrip from '../components/home/BrandStrip.astro';
+import FilterBar from '../components/FilterBar.astro';
+import ProjectGrid from '../components/ProjectGrid.astro';
 ---
 
 <BaseLayout>
-  <HomeHero />
-  <BrandStrip />
-  <FabLabCarousel />
+  <div class="container projects">
+    <h1 class="visually-hidden">Projects</h1>
+    <FilterBar />
+    <ProjectGrid />
+  </div>
 </BaseLayout>
+
+<style>
+  .projects {
+    display: grid;
+    gap: var(--space-8);
+    padding-top: var(--space-8);
+  }
+</style>

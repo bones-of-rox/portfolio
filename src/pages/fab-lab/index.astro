@@ -1,11 +1,6 @@
 ---
-import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import MadeCard from '../../components/MadeCard.astro';
-
-const pieces = (await getCollection('made', ({ data }) => !data.draft)).sort(
-  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
-);
+import ProjectGrid from '../../components/ProjectGrid.astro';
 ---
 
 <BaseLayout
@@ -18,9 +13,7 @@ const pieces = (await getCollection('made', ({ data }) => !data.draft)).sort(
       <p class="lead">Things I design and build that can be touched and held.</p>
     </header>
 
-    <ul class="grid" role="list">
-      {pieces.map((piece) => <MadeCard piece={piece} />)}
-    </ul>
+    <ProjectGrid />
   </div>
 </BaseLayout>
 
@@ -34,25 +27,5 @@ const pieces = (await getCollection('made', ({ data }) => !data.draft)).sort(
   .made-intro {
     display: grid;
     gap: var(--space-4);
-  }
-
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: var(--space-8) var(--space-4);
-    padding: 0;
-  }
-
-  @media (min-width: 40em) {
-    .grid {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: var(--space-10) var(--space-6);
-    }
-  }
-
-  @media (min-width: 64em) {
-    .grid {
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-    }
   }
 </style>

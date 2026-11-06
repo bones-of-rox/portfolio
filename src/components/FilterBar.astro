@@ -1,0 +1,54 @@
+---
+/*
+  Placeholder filters: they look and focus like real ones but don't filter yet.
+  When they're wired up, each button will show or hide pieces by category.
+*/
+const filters = ['All', '3D prints', 'Furniture', 'Gifts', 'Outdoors'];
+---
+
+<div class="filter-bar" role="group" aria-label="Filter projects">
+  {
+    filters.map((label, i) => (
+      <button type="button" class="filter" aria-pressed={i === 0 ? 'true' : 'false'}>
+        {label}
+      </button>
+    ))
+  }
+</div>
+
+<style>
+  /* On phones the row scrolls sideways if the filters don't fit */
+  .filter-bar {
+    display: flex;
+    gap: var(--space-2);
+    overflow-x: auto;
+    padding-block: var(--space-1);
+    scrollbar-width: none;
+  }
+
+  .filter {
+    flex: none;
+    min-height: var(--target-min);
+    padding-inline: var(--space-4);
+    border: var(--border-width) solid var(--color-border-strong);
+    border-radius: var(--radius-pill);
+    background-color: var(--color-surface);
+    color: var(--color-text);
+    font: inherit;
+    font-size: var(--text-sm);
+    font-weight: var(--weight-medium);
+    cursor: pointer;
+    transition: background-color var(--duration-fast), border-color var(--duration-fast);
+  }
+
+  .filter:hover {
+    border-color: var(--color-text-muted);
+    background-color: var(--color-surface-raised);
+  }
+
+  .filter[aria-pressed='true'] {
+    border-color: var(--color-accent);
+    background-color: var(--color-accent);
+    color: var(--color-on-accent);
+  }
+</style>
