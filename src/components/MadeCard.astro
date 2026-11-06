@@ -35,16 +35,21 @@ const sizes = '(min-width: 64em) 22rem, (min-width: 40em) 33vw, 50vw';
         class:list={['card-image', 'card-photo', { 'has-sketch': sketch }]}
       />
     </div>
-    <span class="card-title">{title}</span>
-    <span class="card-meta">{type} · {when}</span>
+    <span class="card-caption">
+      <span class="card-title">{title}</span>
+      <span class="card-meta">{type} · {when}</span>
+    </span>
   </a>
 </li>
 
 <style>
+  /* Photo on top, white caption panel below, together reading as one card */
   .card-link {
     display: grid;
-    gap: var(--space-1);
-    color: var(--color-text);
+    grid-template-rows: auto 1fr;
+    height: 100%;
+    overflow: hidden;
+    color: var(--color-card-text);
     text-decoration: none;
     border-radius: var(--radius-md);
   }
@@ -53,8 +58,6 @@ const sizes = '(min-width: 64em) 22rem, (min-width: 40em) 33vw, 50vw';
     display: grid;
     aspect-ratio: 4 / 5;
     overflow: hidden;
-    margin-bottom: var(--space-2);
-    border-radius: var(--radius-md);
     background-color: var(--color-surface);
   }
 
@@ -74,6 +77,14 @@ const sizes = '(min-width: 64em) 22rem, (min-width: 40em) 33vw, 50vw';
     opacity: 0;
   }
 
+  .card-caption {
+    display: grid;
+    align-content: start;
+    gap: var(--space-1);
+    padding: var(--space-3) var(--space-3) var(--space-4);
+    background-color: var(--color-card-bg);
+  }
+
   .card-title {
     font-family: var(--font-heading);
     font-size: var(--text-lg);
@@ -88,7 +99,7 @@ const sizes = '(min-width: 64em) 22rem, (min-width: 40em) 33vw, 50vw';
 
   .card-meta {
     font-size: var(--text-sm);
-    color: var(--color-text-muted);
+    color: var(--color-card-text-muted);
   }
 
   /* Hover (mouse) and keyboard focus share the same effect */

@@ -16,8 +16,10 @@
   --gray-800: #26262b;
   --gray-700: #3d3d44;
   --gray-500: #6e6e78;
+  --gray-600: #55555d;
   --gray-300: #a9a9b2;
   --gray-100: #ededef;
+  --white: #ffffff;
   --orange-400: #ff8552;
   --orange-300: #ffa07a;
   --teal-300: #5fd4c4;
@@ -38,6 +40,12 @@
   --color-accent-hover: var(--orange-300);
   --color-on-accent: var(--gray-950);
   --color-highlight: var(--teal-300);
+
+  /* Project tiles: white caption panel under each photo.
+     Contrast on white: card-text 18.4, card-text-muted 7.4 */
+  --color-card-bg: var(--white);
+  --color-card-text: var(--gray-950);
+  --color-card-text-muted: var(--gray-600);
   --color-focus: var(--orange-400);
 
   /* ---------- Type ---------- */
