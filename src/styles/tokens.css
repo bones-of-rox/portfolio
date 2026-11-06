@@ -49,10 +49,12 @@
   --color-focus: var(--orange-400);
 
   /* ---------- Type ---------- */
-  --font-serif: 'Fraunces Variable', Georgia, 'Times New Roman', serif;
-  --font-sans: 'Inter Variable', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-  --font-heading: var(--font-serif);
-  --font-body: var(--font-sans);
+  /* Trying (2026-11-06): Montserrat for titles, Cardo for paragraphs.
+     Cardo only comes in regular and bold, so medium and semibold text shows as one of those. */
+  --font-serif: 'Cardo', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Montserrat Variable', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-heading: var(--font-sans);
+  --font-body: var(--font-serif);
 
   /* Fluid sizes: smallest value on phones, largest on wide screens */
   --text-sm: clamp(0.875rem, 0.85rem + 0.1vw, 0.9375rem);
