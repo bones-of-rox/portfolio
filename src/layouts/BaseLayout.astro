@@ -13,6 +13,10 @@ interface Props {
   title?: string;
   description?: string;
   noindex?: boolean;
+  /** true: plain dark background instead of the wood */
+  plain?: boolean;
+  /** true: the site header sits over the top of the page (e.g. over a photo) */
+  overlayHeader?: boolean;
 }
 
 const siteName = 'Projeks';
@@ -20,6 +24,8 @@ const {
   title,
   description = 'Projeks: things built by hand and machine by Donovan Preddy.',
   noindex = false,
+  plain = false,
+  overlayHeader = false,
 } = Astro.props;
 // The wood photo lives in public/, so its address needs the site's base path
 const woodTexture = `url(${url('/textures/wood-grain.webp')})`;
@@ -35,7 +41,7 @@ const pageTitle = title ? `${title} | ${siteName}` : siteName;
     <meta name="description" content={description} />
     {noindex && <meta name="robots" content="noindex" />}
   </head>
-  <body>
+  <body class:list={{ 'bg-plain': plain, 'header-over': overlayHeader }}>
     <a class="skip-link" href="#main">Skip to content</a>
     <Header />
     <main id="main" tabindex="-1">

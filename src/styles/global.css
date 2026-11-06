@@ -63,6 +63,30 @@ body::after {
   opacity: var(--scroll-progress, 0);
 }
 
+/* Pages that ask for a plain background (project pages) skip the wood */
+body.bg-plain::before,
+body.bg-plain::after {
+  display: none;
+}
+
+/* Site header laid over the top of the page, e.g. over a full-bleed photo */
+body.header-over {
+  position: relative;
+}
+
+body.header-over .site-header {
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  z-index: 2;
+  border-bottom: none;
+  text-shadow: var(--photo-text-shadow);
+}
+
+body.header-over .site-header .tagline {
+  color: var(--color-on-photo);
+}
+
 main {
   flex: 1;
 }

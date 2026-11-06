@@ -90,6 +90,7 @@
   --space-10: 2.5rem;
   --space-12: 3rem;
   --space-16: 4rem;
+  --space-24: 6rem;
   --space-section: clamp(3rem, 2rem + 5vw, 6rem);
 
   /* ---------- Layout ---------- */
@@ -119,6 +120,13 @@
      --texture-wood (the stained-wood photo) is set in BaseLayout, because
      its address depends on the site's base path. */
   --bg-wood-darken: 0.25; /* extra black over the wood so text keeps AA contrast */
+
+  /* ---------- Text over photos (project page top photo) ---------- */
+  --color-on-photo: var(--white);
+  --photo-scrim-top: rgb(0 0 0 / 0.75);
+  --photo-scrim-bottom: rgb(0 0 0 / 0.8);
+  --photo-text-shadow: 0 1px 12px rgb(0 0 0 / 0.5);
+  --hero-height: 80svh;
 
   /* ---------- Homepage ---------- */
   --brand-logo-size: 7rem; /* logos are sized to roughly equal area around this */

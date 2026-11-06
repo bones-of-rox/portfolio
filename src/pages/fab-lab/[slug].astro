@@ -3,6 +3,7 @@ import { Image, getImage } from 'astro:assets';
 import { getCollection, render, type CollectionEntry } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { url } from '../../utils';
+import { coverTone } from '../../cover-tone';
 
 export async function getStaticPaths() {
   const pieces = (await getCollection('made', ({ data }) => !data.draft)).sort(
@@ -21,9 +22,10 @@ interface Props {
 }
 
 const { piece, newer, older } = Astro.props;
-const { title, summary, type, date, dateLabel, madeFor, materials, tools, size, cover, photos, photoLayout, videos } =
+const { title, summary, type, date, dateLabel, madeFor, materials, tools, size, cover, coverFocus, photos, photoLayout, videos } =
   piece.data;
 const { Content } = await render(piece);
+const tone = await coverTone(piece.id);
 
 const facts = [
   { label: 'Type', value: type },
@@ -43,26 +45,32 @@ const videoList = await Promise.all(
 );
 ---
 
-<BaseLayout title={title} description={summary}>
-  <article class="container piece">
-    <a class="back-link" href={url('/fab-lab/')}>
-      <span aria-hidden="true">←</span> Back to 3D
-    </a>
-
-    <header class="piece-header">
-      <h1>{title}</h1>
-      <p class="lead">{summary}</p>
+<BaseLayout title={title} description={summary} plain overlayHeader>
+  <article class="piece">
+    <!-- Top photo runs edge to edge and up under the site header, with the title on it -->
+    <header
+      class="piece-hero"
+      style={`--cover-tint: ${tone.tint}; --cover-tint-strength: ${tone.strength}; --cover-focus: ${coverFocus ?? '50% 50%'}`}
+    >
+      <Image
+        src={cover.src}
+        alt={cover.alt}
+        widths={[480, 800, 1200, 1600, 2400]}
+        sizes="100vw"
+        class="piece-cover"
+        loading="eager"
+        fetchpriority="high"
+      />
+      <div class="piece-hero-text container">
+        <a class="back-link" href={url('/')}>
+          <span aria-hidden="true">←</span> All projects
+        </a>
+        <h1>{title}</h1>
+        <p class="lead">{summary}</p>
+      </div>
     </header>
 
-    <Image
-      src={cover.src}
-      alt={cover.alt}
-      widths={[480, 800, 1200, 1600]}
-      sizes="(min-width: 72rem) 68rem, 100vw"
-      class="piece-cover"
-      loading="eager"
-      fetchpriority="high"
-    />
+    <div class="container piece-main">
 
     <div class="piece-body">
       <div class="piece-story">
@@ -159,6 +167,7 @@ const videoList = await Promise.all(
         </nav>
       )
     }
+    </div>
   </article>
 </BaseLayout>
 
@@ -166,7 +175,76 @@ const videoList = await Promise.all(
   .piece {
     display: grid;
     gap: var(--space-10);
-    padding-top: var(--space-8);
+  }
+
+  .piece-main {
+    display: grid;
+    gap: var(--space-10);
+    width: 100%;
+  }
+
+  /* ---------- Full-bleed top photo with the title on it ---------- */
+  .piece-hero {
+    position: relative;
+    display: grid;
+    align-items: end;
+    min-height: var(--hero-height);
+    overflow: hidden;
+    isolation: isolate;
+    color: var(--color-on-photo);
+  }
+
+  .piece-cover {
+    position: absolute;
+    inset: 0;
+    z-index: -3;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: var(--cover-focus);
+  }
+
+  /* Soft wash in the photo's own tone: turns bright whites a gentle color */
+  .piece-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    background-color: var(--cover-tint);
+    opacity: var(--cover-tint-strength);
+    mix-blend-mode: multiply;
+  }
+
+  /* Darker at the top (site name) and bottom (title) so white text stays readable */
+  .piece-hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background-image: linear-gradient(
+      to bottom,
+      var(--photo-scrim-top) 0%,
+      transparent 30%,
+      transparent 35%,
+      var(--photo-scrim-bottom) 55%,
+      var(--photo-scrim-bottom) 100%
+    );
+  }
+
+  .piece-hero-text {
+    display: grid;
+    gap: var(--space-3);
+    padding-top: var(--space-24);
+    padding-bottom: var(--space-10);
+    text-shadow: var(--photo-text-shadow);
+  }
+
+  .piece-hero-text .lead {
+    color: var(--color-on-photo);
+  }
+
+  .piece-hero .back-link {
+    color: var(--color-on-photo);
   }
 
   .back-link {
@@ -179,19 +257,9 @@ const videoList = await Promise.all(
     font-weight: var(--weight-medium);
   }
 
-  .piece-header {
-    display: grid;
-    gap: var(--space-4);
-  }
-
   /* A lighter weight for the big project title */
-  .piece-header h1 {
+  .piece-hero h1 {
     font-weight: var(--weight-light);
-  }
-
-  .piece-cover {
-    width: 100%;
-    border-radius: var(--radius-lg);
   }
 
   .piece-body {

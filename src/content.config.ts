@@ -27,6 +27,8 @@ const made = defineCollection({
       tools: z.array(z.string()).optional(),
       size: z.string().optional(),
       cover: photo, // lead photo on the detail page
+      // Which part of the cover to keep when a narrow screen crops it, e.g. "20% 50%" (left of center)
+      coverFocus: z.string().optional(),
       thumbnail: photo.optional(), // gallery tile (4:5); falls back to cover
       photos: z.array(photo).default([]),
       // mixed: tall photos as 4:5 tiles, wide photos span the row
