@@ -1,6 +1,6 @@
 # Donovan Preddy portfolio
 
-Personal portfolio for Donovan, a UX designer and UX leader. Sections: UX case studies (some leadership-focused), a gallery of 3D-printed products and furniture, shown on the site as "3D" at /fab-lab/ (renamed from "Le Fab Lab" on 2026-10-31) (internally still the "Made" collection; old /made/ links redirect there), and About.
+**Projeks** (tagline: "Built by hand and machine by Donovan Preddy"): a site only for Donovan's projects, a gallery of 3D-printed products and furniture, shown as "3D" at /fab-lab/ (internally still the "Made" collection; old /made/ links redirect there). On 2026-11-06 Donovan chose to drop the UX case studies (Work) and About pages, and the top navigation.
 
 ## Working with Donovan
 
@@ -23,20 +23,19 @@ Personal portfolio for Donovan, a UX designer and UX leader. Sections: UX case s
 - Hosted on GitHub Pages and deployed by `.github/workflows/deploy.yml` on every push to `main`.
 - Domain: donovanpreddy.com, to be connected at launch (stage 7).
 - Design tokens live in `src/styles/tokens.css`. Base styles are in `src/styles/global.css`, and the page frame is `src/layouts/BaseLayout.astro`. The `/style-guide/` page shows every token.
-- Look: dark grays, with an orange accent for buttons, links, and focus, and a teal highlight for small labels. Fraunces (serif) for headings, Inter (sans) for body text.
+- Look: a fixed, dark black-stained wood background (public/textures/wood-grain.webp) that the page scrolls over, fading to charcoal toward the bottom of the page. Dark grays, with an orange accent for buttons, links, and focus, and a teal highlight for small labels. Fraunces (serif) for headings, Inter (sans) for body text.
 - Made gallery tiles show a chalk sketch (light lines on near-black) that fades to the real photo on hover or focus. `scripts/make-sketches.mjs` generates the sketches and runs before `dev` and `build`.
 - Commands: `npm run dev` for a local preview, `npm run build` for a production build.
 
 ## Plan
 
-Site: Home, Work (filter Design / Leadership), a page per case study, Made gallery, a page per Made piece, and About.
+Site: Home, the 3D gallery, and a page per piece.
 
-Stages:
+Stages (case studies and About were dropped on 2026-11-06):
 1. Setup
 2. Design tokens and page frame
-3. Case studies
 4. Made gallery, plus the "add from phone" routine
-5. About and Home
+5. Home
 6. Accessibility and speed QA
 7. Launch
 
