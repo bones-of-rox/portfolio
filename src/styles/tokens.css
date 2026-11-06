@@ -40,6 +40,7 @@
   --color-accent-hover: var(--orange-300);
   --color-on-accent: var(--gray-950);
   --color-highlight: var(--teal-300);
+  --color-header-rule: var(--gray-300);
 
   /* Project tiles: white caption panel under each photo.
      Contrast on white: card-text 18.4, card-text-muted 7.4 */
@@ -73,6 +74,7 @@
   --weight-regular: 400;
   --weight-medium: 500;
   --weight-semibold: 600;
+  --weight-bold: 700;
 
   --tracking-tight: -0.015em;
   --tracking-wide: 0.06em;

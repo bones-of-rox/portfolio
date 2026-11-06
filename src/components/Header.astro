@@ -1,35 +1,48 @@
 ---
 import { url } from '../utils';
+
+// "View all" shows on every page except the homepage, which is already the full list
+const home = url('/');
+const onHome = Astro.url.pathname === home || Astro.url.pathname === `${home}/`;
 ---
 
 <header class="site-header">
-  <div class="container site-header-inner">
-    <a class="site-name" href={url('/')}>Projeks</a>
-    <p class="tagline">Built by hand and machine by Donovan Preddy</p>
+  <div class="container">
+    <div class="site-header-inner">
+      <a class="site-name" href={home}>Projeks</a>
+      <p class="tagline">Built by hand and machine by Donovan Preddy</p>
+      {
+        !onHome && (
+          <a class="view-all" href={home}>
+            View all<span class="visually-hidden"> projects</span>
+          </a>
+        )
+      }
+    </div>
   </div>
 </header>
 
 <style>
-  .site-header {
-    border-bottom: var(--border-width) solid var(--color-border);
-  }
-
+  /* Name on the left; tagline and "View all" on the right; a rule under it all */
   .site-header-inner {
     display: flex;
     flex-wrap: wrap;
-    align-items: baseline;
-    gap: 0 var(--space-4);
-    padding-block: var(--space-3);
+    align-items: center;
+    gap: var(--space-2) var(--space-8);
+    padding-block: var(--space-4) var(--space-3);
+    border-bottom: var(--border-width) solid var(--color-header-rule);
   }
 
   .site-name {
     display: inline-flex;
     align-items: center;
     min-height: var(--target-min);
+    margin-inline-end: auto;
     font-family: var(--font-heading);
     font-size: var(--text-2xl);
-    font-weight: var(--weight-medium);
-    letter-spacing: var(--tracking-tight);
+    font-weight: var(--weight-bold);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
     color: var(--color-text);
     text-decoration: none;
   }
@@ -39,7 +52,37 @@ import { url } from '../utils';
   }
 
   .tagline {
+    flex-basis: 100%;
+    order: 3;
     font-size: var(--text-sm);
+    line-height: var(--leading-snug);
     color: var(--color-text-muted);
+  }
+
+  .view-all {
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--target-min);
+    font-family: var(--font-heading);
+    font-size: var(--text-base);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    color: var(--color-text);
+    text-decoration: none;
+  }
+
+  .view-all:hover {
+    color: var(--color-accent);
+    text-decoration: underline;
+  }
+
+  /* Wider screens: everything on one line, tagline sits just left of "View all" */
+  @media (min-width: 40em) {
+    .tagline {
+      flex-basis: auto;
+      order: 0;
+      max-width: 15rem;
+      text-align: start;
+    }
   }
 </style>

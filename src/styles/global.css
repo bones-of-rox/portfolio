@@ -83,7 +83,8 @@ body.header-over .site-header {
   text-shadow: var(--photo-text-shadow);
 }
 
-body.header-over .site-header .tagline {
+body.header-over .site-header .tagline,
+body.header-over .site-header .view-all {
   color: var(--color-on-photo);
 }
 

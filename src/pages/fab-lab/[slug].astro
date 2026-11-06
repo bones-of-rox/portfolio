@@ -62,9 +62,6 @@ const videoList = await Promise.all(
         fetchpriority="high"
       />
       <div class="piece-hero-text container">
-        <a class="back-link" href={url('/')}>
-          <span aria-hidden="true">←</span> All projects
-        </a>
         <h1>{title}</h1>
         <p class="lead">{summary}</p>
       </div>
@@ -224,7 +221,8 @@ const videoList = await Promise.all(
     background-image: linear-gradient(
       to bottom,
       var(--photo-scrim-top) 0%,
-      transparent 30%,
+      var(--photo-scrim-top) 14%,
+      transparent 32%,
       transparent 35%,
       var(--photo-scrim-bottom) 55%,
       var(--photo-scrim-bottom) 100%
@@ -241,20 +239,6 @@ const videoList = await Promise.all(
 
   .piece-hero-text .lead {
     color: var(--color-on-photo);
-  }
-
-  .piece-hero .back-link {
-    color: var(--color-on-photo);
-  }
-
-  .back-link {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--space-2);
-    justify-self: start;
-    min-height: var(--target-min);
-    font-size: var(--text-sm);
-    font-weight: var(--weight-medium);
   }
 
   /* A lighter weight for the big project title */
