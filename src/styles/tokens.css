@@ -127,6 +127,7 @@
   --color-on-photo: var(--white);
   --photo-scrim-top: rgb(0 0 0 / 0.75);
   --photo-scrim-bottom: rgb(0 0 0 / 0.8);
+  --photo-text-shade: rgb(0 0 0 / 0.6); /* soft local shade behind text on graded photos */
   --photo-text-shadow: 0 1px 12px rgb(0 0 0 / 0.5);
   --hero-height: 80svh;
 
