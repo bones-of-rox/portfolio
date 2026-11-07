@@ -22,10 +22,10 @@ interface Props {
 }
 
 const { piece, newer, older } = Astro.props;
-const { title, summary, type, date, dateLabel, madeFor, materials, tools, size, cover, coverFocus, photos, photoLayout, videos } =
+const { title, summary, type, date, dateLabel, madeFor, materials, tools, size, cover, coverFocus, coverPlain, photos, photoLayout, videos } =
   piece.data;
 const { Content } = await render(piece);
-const tone = await coverTone(piece.id);
+const tone = coverPlain ? { tint: 'transparent', strength: 0 } : await coverTone(piece.id);
 
 const facts = [
   { label: 'Type', value: type },
@@ -49,7 +49,7 @@ const videoList = await Promise.all(
   <article class="piece">
     <!-- Top photo runs edge to edge and up under the site header, with the title on it -->
     <header
-      class="piece-hero"
+      class:list={['piece-hero', { 'is-plain': coverPlain }]}
       style={`--cover-tint: ${tone.tint}; --cover-tint-strength: ${tone.strength}; --cover-focus: ${coverFocus ?? '50% 50%'}`}
     >
       <Image
@@ -227,6 +227,16 @@ const videoList = await Promise.all(
       transparent 35%,
       var(--photo-scrim-bottom) 55%,
       var(--photo-scrim-bottom) 100%
+    );
+  }
+
+  /* Already-graded photos keep only the top shade behind the site header */
+  .piece-hero.is-plain::after {
+    background-image: linear-gradient(
+      to bottom,
+      var(--photo-scrim-top) 0%,
+      var(--photo-scrim-top) 14%,
+      transparent 32%
     );
   }
 

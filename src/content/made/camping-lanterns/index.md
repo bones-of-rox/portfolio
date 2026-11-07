@@ -5,9 +5,11 @@ type: 3D print
 date: 2026-04-01
 dateLabel: Spring 2026
 cover:
-  src: ./campsite-at-night.jpg
+  src: ./campsite-at-night-warm.jpg
   alt: A campsite at night lit by two of the lanterns, each glowing warm orange on a tree-stump table, with camp chairs and a small fire between them.
 coverFocus: 15% 50%
+# The lantern glow is warmed in the photo itself (scripts/warm-highlights.py), so skip the page's wash and bottom shade
+coverPlain: true
 thumbnail:
   src: ./lantern-thumbnail.jpg
   alt: A white lantern with twisting, petal-like folds standing in green grass, with a wire hook on top for hanging.
