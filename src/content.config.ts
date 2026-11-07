@@ -29,7 +29,7 @@ const made = defineCollection({
       cover: photo, // lead photo on the detail page
       // Which part of the cover to keep when a narrow screen crops it, e.g. "20% 50%" (left of center)
       coverFocus: z.string().optional(),
-      // true: no automatic color wash or dark bottom shade over the cover (the photo is already graded)
+      // true: no automatic color wash over the cover (the photo is already graded)
       coverPlain: z.boolean().default(false),
       thumbnail: photo.optional(), // gallery tile (4:5); falls back to cover
       photos: z.array(photo).default([]),

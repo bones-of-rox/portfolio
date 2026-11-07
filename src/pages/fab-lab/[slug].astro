@@ -213,7 +213,7 @@ const videoList = await Promise.all(
     mix-blend-mode: multiply;
   }
 
-  /* Darker at the top (site name) and bottom (title) so white text stays readable */
+  /* A shade only at the top, behind the site name; no band at the bottom */
   .piece-hero::after {
     content: '';
     position: absolute;
@@ -223,36 +223,23 @@ const videoList = await Promise.all(
       to bottom,
       var(--photo-scrim-top) 0%,
       var(--photo-scrim-top) 14%,
-      transparent 32%,
-      transparent 35%,
-      var(--photo-scrim-bottom) 55%,
-      var(--photo-scrim-bottom) 100%
-    );
-  }
-
-  /* Already-graded photos keep only the top shade behind the site header */
-  .piece-hero.is-plain::after {
-    background-image: linear-gradient(
-      to bottom,
-      var(--photo-scrim-top) 0%,
-      var(--photo-scrim-top) 14%,
       transparent 32%
     );
   }
 
-  /* ...plus a soft, local shadow right behind the title and description,
+  /* A soft, local shadow right behind the title and description,
      so white text stays readable over bright spots without a full band */
-  .piece-hero.is-plain .piece-hero-text {
+  .piece-hero .piece-hero-text {
     position: relative;
     isolation: isolate;
   }
 
-  .piece-hero.is-plain .piece-hero-text::before {
+  .piece-hero .piece-hero-text::before {
     content: '';
     position: absolute;
     z-index: -1;
     /* Reaches past the text on every side, then fades to nothing at its edges */
-    inset: var(--space-8) calc(var(--space-24) * -1) calc(var(--space-8) * -1);
+    inset: var(--space-8) calc(var(--space-24) * -1) calc(var(--space-16) * -1);
     background-image: radial-gradient(
       closest-side,
       var(--photo-text-shade) 0%,
