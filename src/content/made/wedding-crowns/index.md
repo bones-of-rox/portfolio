@@ -5,6 +5,8 @@ type: 3D print
 date: 2024-05-24
 dateLabel: May 2024
 madeFor: My wife and me, for our wedding
+# No automatic color wash over the top photo (Donovan saw it as a dark band, 2026-11-07)
+coverPlain: true
 cover:
   src: ./ceremony-by-river.jpg
   alt: The couple seen from behind at a riverside ceremony, each wearing a thin white crown, with a ribbon linking the two crowns. The officiant stands facing them at a microphone, with flowers at their feet.

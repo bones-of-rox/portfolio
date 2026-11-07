@@ -7,6 +7,8 @@ dateLabel: Summer 2026
 materials:
   - Oak boards
   - 3D-printed brackets
+# No automatic color wash over the top photo (Donovan saw it as a dark band, 2026-11-07)
+coverPlain: true
 cover:
   src: ./shelf-angle-wide.jpg
   alt: The storage shelf on its own, seen at an angle on a counter. Two oak shelves are held at each end by white 3D-printed brackets, with open sides.
