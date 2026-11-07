@@ -10,7 +10,6 @@ const onHome = Astro.url.pathname === home || Astro.url.pathname === `${home}/`;
   <div class="container">
     <div class="site-header-inner">
       <a class="site-name" href={home}>Projeks</a>
-      <p class="tagline">Built by hand and machine by Donovan Preddy</p>
       {
         !onHome && (
           <a class="view-all" href={home}>
@@ -23,7 +22,7 @@ const onHome = Astro.url.pathname === home || Astro.url.pathname === `${home}/`;
 </header>
 
 <style>
-  /* Name on the left; tagline and "View all" on the right; a rule under it all */
+  /* Name on the left, "View all" on the right, a rule under both */
   .site-header-inner {
     display: flex;
     flex-wrap: wrap;
@@ -51,14 +50,6 @@ const onHome = Astro.url.pathname === home || Astro.url.pathname === `${home}/`;
     color: var(--color-accent);
   }
 
-  .tagline {
-    flex-basis: 100%;
-    order: 3;
-    font-size: var(--text-sm);
-    line-height: var(--leading-snug);
-    color: var(--color-text-muted);
-  }
-
   .view-all {
     display: inline-flex;
     align-items: center;
@@ -74,15 +65,5 @@ const onHome = Astro.url.pathname === home || Astro.url.pathname === `${home}/`;
   .view-all:hover {
     color: var(--color-accent);
     text-decoration: underline;
-  }
-
-  /* Wider screens: everything on one line, tagline sits just left of "View all" */
-  @media (min-width: 40em) {
-    .tagline {
-      flex-basis: auto;
-      order: 0;
-      max-width: 15rem;
-      text-align: start;
-    }
   }
 </style>

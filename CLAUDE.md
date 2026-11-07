@@ -1,6 +1,6 @@
 # Donovan Preddy portfolio
 
-**Projeks** (tagline: "Built by hand and machine by Donovan Preddy"): a site only for Donovan's projects, a gallery of 3D-printed products and furniture, shown as "3D" at /fab-lab/ (internally still the "Made" collection; old /made/ links redirect there). On 2026-11-06 Donovan chose to drop the UX case studies (Work) and About pages, and the top navigation.
+**Projeks** (the tagline "Built by hand and machine by Donovan Preddy" was removed from the header on 2026-11-07; it remains in the page description): a site only for Donovan's projects, a gallery of 3D-printed products and furniture, shown as "3D" at /fab-lab/ (internally still the "Made" collection; old /made/ links redirect there). On 2026-11-06 Donovan chose to drop the UX case studies (Work) and About pages, and the top navigation.
 
 ## Working with Donovan
 

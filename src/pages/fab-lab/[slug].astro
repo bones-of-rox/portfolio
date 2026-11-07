@@ -76,7 +76,8 @@ const videoList = await Promise.all(
       </div>
 
       <section class="facts" aria-labelledby="facts-heading">
-        <h2 id="facts-heading" class="facts-heading">Quick facts</h2>
+        <!-- Heading stays for screen readers, hidden on screen -->
+        <h2 id="facts-heading" class="visually-hidden">Quick facts</h2>
         <dl>
           {
             facts.map((fact) => (
@@ -270,10 +271,6 @@ const videoList = await Promise.all(
     padding: var(--space-6);
     border-radius: var(--radius-lg);
     background-color: var(--color-surface);
-  }
-
-  .facts-heading {
-    font-size: var(--text-xl);
   }
 
   .facts dl {
