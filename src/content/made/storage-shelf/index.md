@@ -10,12 +10,17 @@ materials:
 # No automatic color wash over the top photo (Donovan saw it as a dark band, 2026-11-07)
 coverPlain: true
 cover:
-  src: ./shelf-angle-wide.jpg
-  alt: The storage shelf on its own, seen at an angle on a counter. Two oak shelves are held at each end by white 3D-printed brackets, with open sides.
+  src: ./shelf-render.jpg
+  alt: A rendering of the storage shelf in plain pale gray on a textured cream background, seen at an angle. A flat top and a lower shelf are joined at each end by open rectangular frames with small feet.
+coverFocus: 72% 50%
+# The render is pale, so the title and header use dark text
+coverLight: true
 thumbnail:
   src: ./shelf-in-use-thumbnail.jpg
   alt: The shelf installed beside a toilet tank, holding a tissue box and a small tin, with a roll of toilet paper stored underneath.
 photos:
+  - src: ./shelf-angle-wide.jpg
+    alt: The storage shelf on its own, seen at an angle on a counter. Two oak shelves are held at each end by white 3D-printed brackets, with open sides.
   - src: ./shelf-in-use.jpg
     alt: The shelf in use behind the toilet tank, with a tissue box and a lidded tin on top and spare toilet paper in the open cubby below.
   - src: ./cubby-view.jpg
