@@ -1,9 +1,12 @@
 ---
 title: Stik
 summary: A two-part design shown in a pale line render.
-type: 3D print
-date: 2026-11-01
-dateLabel: Fall 2026
+type: Other
+date: 2010-01-15
+dateLabel: Winter 2010
+materials:
+  - Wood (various)
+  - Rare earth magnets
 cover:
   src: ./stik-render.jpg
   alt: A line rendering of Stik in pale gray on a textured cream background. Two long, flat pieces lie side by side, each wide at one end and narrowing through a gentle S-curve into a slim strap with two small round holes at its tip.
