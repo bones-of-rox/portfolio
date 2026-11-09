@@ -52,8 +52,7 @@ const onHome = Astro.url.pathname === home || Astro.url.pathname === `${home}/`;
     color: var(--color-accent);
   }
 
-  /* Back to the gallery: a square, rounded, frosted-glass button with a left arrow.
-     The dark glass keeps the white arrow readable on dark photos and pale renders alike. */
+  /* Back to the gallery: a square, rounded, light frosted-glass button with a dark left arrow */
   .back-button {
     margin-top: var(--space-4);
     display: inline-grid;
@@ -61,7 +60,6 @@ const onHome = Astro.url.pathname === home || Astro.url.pathname === `${home}/`;
     width: var(--back-button-size);
     height: var(--back-button-size);
     border-radius: var(--radius-md);
-    border: var(--border-width) solid var(--back-button-border);
     background-color: var(--back-button-bg);
     -webkit-backdrop-filter: blur(var(--back-button-blur));
     backdrop-filter: blur(var(--back-button-blur));

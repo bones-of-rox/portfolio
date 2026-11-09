@@ -143,14 +143,13 @@
     0 2px 22px rgb(0 0 0 / 0.4);
   --hero-height: 80svh;
 
-  /* Back button (project pages): frosted dark glass, white arrow.
-     Over the palest render the glass reads about mid-gray: arrow about 4.5:1, button edge about 3.5:1 */
+  /* Back button (project pages): light frosted glass, dark arrow.
+     The glass is at least 60% white, so the arrow stays above 7:1 on dark photos and pale renders alike */
   --back-button-size: var(--target-min);
-  --back-button-bg: rgb(20 20 23 / 0.55);
-  --back-button-bg-hover: rgb(20 20 23 / 0.75);
+  --back-button-bg: rgb(255 255 255 / 0.6);
+  --back-button-bg-hover: rgb(255 255 255 / 0.8);
   --back-button-blur: 12px;
-  --back-button-icon: var(--white);
-  --back-button-border: rgb(255 255 255 / 0.3); /* faint edge so the glass still reads as a button on dark photos */
+  --back-button-icon: var(--gray-950);
 
   /* ---------- Homepage ---------- */
   --brand-logo-size: 7rem; /* logos are sized to roughly equal area around this */
