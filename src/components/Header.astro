@@ -10,6 +10,7 @@ const onHome = Astro.url.pathname === home || Astro.url.pathname === `${home}/`;
   <div class="container">
     <div class="site-header-inner">
       <a class="site-name" href={home}>Projeks</a>
+    </div>
       {
         !onHome && (
           <a class="back-button" href={home} aria-label="Back to all projects">
@@ -19,12 +20,11 @@ const onHome = Astro.url.pathname === home || Astro.url.pathname === `${home}/`;
           </a>
         )
       }
-    </div>
   </div>
 </header>
 
 <style>
-  /* Name on the left, the back button on the right, a rule under both */
+  /* Name on top with a rule under it; the back button sits below the rule, on the left */
   .site-header-inner {
     display: flex;
     flex-wrap: wrap;
@@ -55,6 +55,7 @@ const onHome = Astro.url.pathname === home || Astro.url.pathname === `${home}/`;
   /* Back to the gallery: a square, rounded, frosted-glass button with a left arrow.
      The dark glass keeps the white arrow readable on dark photos and pale renders alike. */
   .back-button {
+    margin-top: var(--space-4);
     display: inline-grid;
     place-items: center;
     width: var(--back-button-size);
