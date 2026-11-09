@@ -146,7 +146,8 @@ const videoList = await Promise.all(
                   <source src={`${v.base}.webm`} type="video/webm" />
                   <source src={`${v.base}.mp4`} type="video/mp4" />
                 </video>
-                <figcaption id={`video-description-${i}`}>{v.description}</figcaption>
+                {/* Description stays for screen readers only (hidden on screen per Donovan, 2026-11-09) */}
+                <figcaption id={`video-description-${i}`} class="visually-hidden">{v.description}</figcaption>
               </figure>
             </section>
           ))}
