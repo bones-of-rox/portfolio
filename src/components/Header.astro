@@ -1,7 +1,7 @@
 ---
 import { url } from '../utils';
 
-// "View all" shows on every page except the homepage, which is already the full list
+// The back button shows on every page except the homepage, which is already the full list
 const home = url('/');
 const onHome = Astro.url.pathname === home || Astro.url.pathname === `${home}/`;
 ---
@@ -12,8 +12,10 @@ const onHome = Astro.url.pathname === home || Astro.url.pathname === `${home}/`;
       <a class="site-name" href={home}>Projeks</a>
       {
         !onHome && (
-          <a class="view-all" href={home}>
-            View all<span class="visually-hidden"> projects</span>
+          <a class="back-button" href={home} aria-label="Back to all projects">
+            <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false">
+              <path d="M19 12H5M11 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
           </a>
         )
       }
@@ -22,7 +24,7 @@ const onHome = Astro.url.pathname === home || Astro.url.pathname === `${home}/`;
 </header>
 
 <style>
-  /* Name on the left, "View all" on the right, a rule under both */
+  /* Name on the left, the back button on the right, a rule under both */
   .site-header-inner {
     display: flex;
     flex-wrap: wrap;
@@ -50,20 +52,23 @@ const onHome = Astro.url.pathname === home || Astro.url.pathname === `${home}/`;
     color: var(--color-accent);
   }
 
-  .view-all {
-    display: inline-flex;
-    align-items: center;
-    min-height: var(--target-min);
-    font-family: var(--font-heading);
-    font-size: var(--text-base);
-    letter-spacing: var(--tracking-wide);
-    text-transform: uppercase;
-    color: var(--color-text);
-    text-decoration: none;
+  /* Back to the gallery: a square, rounded, frosted-glass button with a left arrow.
+     The dark glass keeps the white arrow readable on dark photos and pale renders alike. */
+  .back-button {
+    display: inline-grid;
+    place-items: center;
+    width: var(--back-button-size);
+    height: var(--back-button-size);
+    border-radius: var(--radius-md);
+    border: var(--border-width) solid var(--back-button-border);
+    background-color: var(--back-button-bg);
+    -webkit-backdrop-filter: blur(var(--back-button-blur));
+    backdrop-filter: blur(var(--back-button-blur));
+    color: var(--back-button-icon);
+    transition: background-color var(--duration-fast) var(--ease-out);
   }
 
-  .view-all:hover {
-    color: var(--color-accent);
-    text-decoration: underline;
+  .back-button:hover {
+    background-color: var(--back-button-bg-hover);
   }
 </style>

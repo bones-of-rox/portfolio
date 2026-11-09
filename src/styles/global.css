@@ -83,10 +83,6 @@ body.header-over .site-header {
   text-shadow: var(--photo-text-shadow);
 }
 
-body.header-over .site-header .view-all {
-  color: var(--color-on-photo);
-}
-
 /* Over a light top photo: the header switches to dark text */
 body.header-over-light .site-header {
   --color-text: var(--color-on-light-photo);
