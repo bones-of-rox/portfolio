@@ -1,5 +1,5 @@
 ---
-title: Refrigerator magnet series
+title: Fridge Magnets
 summary: A set of 3D-printed snowflake and flower magnets, made as Christmas gifts.
 type: 3D print
 date: 2025-12-15
