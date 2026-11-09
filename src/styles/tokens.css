@@ -143,13 +143,12 @@
     0 2px 22px rgb(0 0 0 / 0.4);
   --hero-height: 80svh;
 
-  /* Back button (project pages): light frosted glass, dark arrow.
-     The glass is at least 60% white, so the arrow stays above 7:1 on dark photos and pale renders alike */
+  /* Back button (project pages): white frosted glass at 10%, so the photo shows through.
+     The arrow follows the header text color: white over dark photos, dark over pale renders (coverLight) */
   --back-button-size: var(--target-min);
-  --back-button-bg: rgb(255 255 255 / 0.6);
-  --back-button-bg-hover: rgb(255 255 255 / 0.8);
+  --back-button-bg: rgb(255 255 255 / 0.1);
+  --back-button-bg-hover: rgb(255 255 255 / 0.2);
   --back-button-blur: 12px;
-  --back-button-icon: var(--gray-950);
 
   /* ---------- Homepage ---------- */
   --brand-logo-size: 7rem; /* logos are sized to roughly equal area around this */

@@ -52,7 +52,7 @@ const onHome = Astro.url.pathname === home || Astro.url.pathname === `${home}/`;
     color: var(--color-accent);
   }
 
-  /* Back to the gallery: a square, rounded, light frosted-glass button with a dark left arrow */
+  /* Back to the gallery: a square, rounded, white frosted-glass button (10%) with a left arrow */
   .back-button {
     margin-top: var(--space-4);
     display: inline-grid;
@@ -63,7 +63,7 @@ const onHome = Astro.url.pathname === home || Astro.url.pathname === `${home}/`;
     background-color: var(--back-button-bg);
     -webkit-backdrop-filter: blur(var(--back-button-blur));
     backdrop-filter: blur(var(--back-button-blur));
-    color: var(--back-button-icon);
+    color: var(--color-text); /* white over dark photos, dark over pale renders */
     transition: background-color var(--duration-fast) var(--ease-out);
   }
 
