@@ -1,5 +1,5 @@
 ---
-title: Brain Trust shot glasses
+title: Shot Glasses
 summary: Custom 3D-printed shot glasses for a yearly weekend with close friends.
 type: 3D print
 date: 2025-10-01
