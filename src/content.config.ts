@@ -33,6 +33,8 @@ const made = defineCollection({
       coverPlain: z.boolean().default(false),
       // true: the top photo is light (e.g. a pale render), so the title and site header switch to dark text
       coverLight: z.boolean().default(false),
+      // true: white page with dark text under the top photo, and a soft shadow under the photo (trying on Stik)
+      pageLight: z.boolean().default(false),
       thumbnail: photo.optional(), // gallery tile (4:5); falls back to cover
       photos: z.array(photo).default([]),
       // mixed: tall photos as 4:5 tiles, wide photos span the row

@@ -24,6 +24,11 @@
   --orange-300: #ffa07a;
   --teal-300: #5fd4c4;
   --charcoal-900: #202023; /* where the wood background fades to */
+  --gray-50: #f6f6f7;
+  --gray-200: #dcdce0;
+  --orange-700: #c2410c;
+  --orange-800: #9a3412;
+  --teal-700: #0f766e;
 
   /* ---------- Color: semantic ----------
      Contrast against --color-bg (WCAG 2.2 AA needs 4.5:1 for text, 3:1 for UI):
@@ -142,6 +147,7 @@
     0 0 10px rgb(0 0 0 / 0.6),
     0 2px 22px rgb(0 0 0 / 0.4);
   --hero-height: 80svh;
+  --hero-shadow: none; /* the light page adds a soft shadow under the top photo */
 
   /* Back button (project pages): white frosted glass at 10%, so the photo shows through.
      The arrow follows the header text color: white over dark photos, dark over pale renders (coverLight) */
@@ -154,6 +160,33 @@
   --brand-logo-size: 7rem; /* logos are sized to roughly equal area around this */
   /* Tile width in the 3D carousel: a part-tile peeks in to show it scrolls */
   --carousel-tile: calc((100% - 2 * var(--space-4)) / 2.3);
+}
+
+/*
+  Light page (trying 2026-11-09 on Stik): a white page under the top photo.
+  Set with pageLight: true in a piece's front matter.
+  Contrast on white: text 18.4, text-muted 7.4, accent 5.2, highlight 5.5, border-strong 5.0
+*/
+.theme-light {
+  color-scheme: light;
+  --color-bg: var(--white);
+  --color-bg-fade: var(--white);
+  --color-surface: var(--gray-50);
+  --color-surface-raised: var(--gray-200);
+  --color-border: var(--gray-200);
+  --color-border-strong: var(--gray-500);
+  --color-text: var(--gray-950);
+  --color-text-muted: var(--gray-600);
+  --color-accent: var(--orange-700);
+  --color-accent-hover: var(--orange-800);
+  --color-on-accent: var(--white);
+  --color-highlight: var(--teal-700);
+  --color-header-rule: var(--gray-600);
+  --color-focus: var(--orange-700);
+  /* Soft shadow under the top photo, so it lifts slightly off the white page */
+  --hero-shadow:
+    0 2px 6px rgb(0 0 0 / 0.08),
+    0 12px 32px rgb(0 0 0 / 0.12);
 }
 
 @media (min-width: 40em) {

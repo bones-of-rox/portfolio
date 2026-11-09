@@ -22,7 +22,7 @@ interface Props {
 }
 
 const { piece, newer, older } = Astro.props;
-const { title, summary, type, date, dateLabel, madeFor, materials, tools, size, cover, coverFocus, coverPlain, coverLight, photos, photoLayout, videos } =
+const { title, summary, type, date, dateLabel, madeFor, materials, tools, size, cover, coverFocus, coverPlain, coverLight, pageLight, photos, photoLayout, videos } =
   piece.data;
 const { Content } = await render(piece);
 const hasStory = Boolean(piece.body?.trim());
@@ -46,7 +46,7 @@ const videoList = await Promise.all(
 );
 ---
 
-<BaseLayout title={title} description={summary} plain overlayHeader lightHeader={coverLight}>
+<BaseLayout title={title} description={summary} plain overlayHeader lightHeader={coverLight} light={pageLight}>
   <article class="piece">
     <!-- Top photo runs edge to edge and up under the site header, with the title on it -->
     <header
@@ -198,6 +198,7 @@ const videoList = await Promise.all(
     overflow: hidden;
     isolation: isolate;
     color: var(--color-on-photo);
+    box-shadow: var(--hero-shadow);
   }
 
   .piece-cover {

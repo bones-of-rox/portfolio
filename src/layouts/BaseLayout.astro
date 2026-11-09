@@ -18,6 +18,8 @@ interface Props {
   /** true: the site header sits over the top of the page (e.g. over a photo) */
   overlayHeader?: boolean;
   lightHeader?: boolean; // the header sits over a light photo, so it uses dark text
+  /** true: white page with dark text (trying on Stik, 2026-11-09) */
+  light?: boolean;
 }
 
 const siteName = 'Projeks';
@@ -28,6 +30,7 @@ const {
   plain = false,
   overlayHeader = false,
   lightHeader = false,
+  light = false,
 } = Astro.props;
 // The wood photo lives in public/, so its address needs the site's base path
 const woodTexture = `url(${url('/textures/wood-grain.webp')})`;
@@ -43,7 +46,7 @@ const pageTitle = title ? `${title} | ${siteName}` : siteName;
     <meta name="description" content={description} />
     {noindex && <meta name="robots" content="noindex" />}
   </head>
-  <body class:list={{ 'bg-plain': plain, 'header-over': overlayHeader, 'header-over-light': overlayHeader && lightHeader }}>
+  <body class:list={{ 'bg-plain': plain, 'header-over': overlayHeader, 'header-over-light': overlayHeader && lightHeader, 'theme-light': light }}>
     <a class="skip-link" href="#main">Skip to content</a>
     <Header />
     <main id="main" tabindex="-1">
