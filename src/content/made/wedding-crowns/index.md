@@ -8,12 +8,17 @@ madeFor: My wife and me, for our wedding
 # No automatic color wash over the top photo (Donovan saw it as a dark band, 2026-11-07)
 coverPlain: true
 cover:
-  src: ./ceremony-by-river.jpg
-  alt: The couple seen from behind at a riverside ceremony, each wearing a thin white crown, with a ribbon linking the two crowns. The officiant stands facing them at a microphone, with flowers at their feet.
+  src: ./crowns-render.jpg
+  alt: A rendering of the two crowns in plain pale gray on a textured cream background, one thin wavy band nested inside the other.
+coverFocus: 72% 50%
+# The render is pale, so the title and header use dark text
+coverLight: true
 thumbnail:
   src: ./crowns-thumbnail.jpg
   alt: The two white crowns laid one inside the other on dark wood, held together by a small white clip.
 photos:
+  - src: ./ceremony-by-river.jpg
+    alt: The couple seen from behind at a riverside ceremony, each wearing a thin white crown, with a ribbon linking the two crowns. The officiant stands facing them at a microphone, with flowers at their feet.
   - src: ./crowns-with-invitation.jpg
     alt: Black-and-white photo of the two thin round crowns on a wooden bench, linked by a loose sheer ribbon, beside the wedding invitation.
   - src: ./couple-seated.jpg
