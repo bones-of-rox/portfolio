@@ -127,6 +127,9 @@
   /* ---------- Text over photos (project page top photo) ---------- */
   --color-on-photo: var(--white);
   --photo-scrim-top: rgb(0 0 0 / 0.75);
+  /* Light top photos (coverLight): dark text, no shadow. On the pale render: ink about 14:1, rule 5.5:1 */
+  --color-on-light-photo: var(--gray-950);
+  --color-on-light-photo-rule: var(--gray-600);
   /* Drop shadow on text over photos: a tight dark edge for crispness plus a soft glow for depth */
   --photo-text-shadow:
     0 1px 2px rgb(0 0 0 / 0.75),

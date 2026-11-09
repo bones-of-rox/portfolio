@@ -31,6 +31,8 @@ const made = defineCollection({
       coverFocus: z.string().optional(),
       // true: no automatic color wash over the cover (the photo is already graded)
       coverPlain: z.boolean().default(false),
+      // true: the top photo is light (e.g. a pale render), so the title and site header switch to dark text
+      coverLight: z.boolean().default(false),
       thumbnail: photo.optional(), // gallery tile (4:5); falls back to cover
       photos: z.array(photo).default([]),
       // mixed: tall photos as 4:5 tiles, wide photos span the row

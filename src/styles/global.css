@@ -87,6 +87,16 @@ body.header-over .site-header .view-all {
   color: var(--color-on-photo);
 }
 
+/* Over a light top photo: the header switches to dark text */
+body.header-over-light .site-header {
+  --color-text: var(--color-on-light-photo);
+  --color-on-photo: var(--color-on-light-photo);
+  --color-accent: var(--color-on-light-photo);
+  --color-focus: var(--color-on-light-photo);
+  --color-header-rule: var(--color-on-light-photo-rule);
+  text-shadow: none;
+}
+
 main {
   flex: 1;
 }

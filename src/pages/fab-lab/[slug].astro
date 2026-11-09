@@ -22,7 +22,7 @@ interface Props {
 }
 
 const { piece, newer, older } = Astro.props;
-const { title, summary, type, date, dateLabel, madeFor, materials, tools, size, cover, coverFocus, coverPlain, photos, photoLayout, videos } =
+const { title, summary, type, date, dateLabel, madeFor, materials, tools, size, cover, coverFocus, coverPlain, coverLight, photos, photoLayout, videos } =
   piece.data;
 const { Content } = await render(piece);
 const tone = coverPlain ? { tint: 'transparent', strength: 0 } : await coverTone(piece.id);
@@ -45,11 +45,11 @@ const videoList = await Promise.all(
 );
 ---
 
-<BaseLayout title={title} description={summary} plain overlayHeader>
+<BaseLayout title={title} description={summary} plain overlayHeader lightHeader={coverLight}>
   <article class="piece">
     <!-- Top photo runs edge to edge and up under the site header, with the title on it -->
     <header
-      class:list={['piece-hero', { 'is-plain': coverPlain }]}
+      class:list={['piece-hero', { 'is-plain': coverPlain, 'is-light': coverLight }]}
       style={`--cover-tint: ${tone.tint}; --cover-tint-strength: ${tone.strength}; --cover-focus: ${coverFocus ?? '50% 50%'}`}
     >
       <Image
@@ -233,6 +233,18 @@ const videoList = await Promise.all(
     padding-top: var(--space-24);
     padding-bottom: var(--space-10);
     text-shadow: var(--photo-text-shadow);
+  }
+
+  /* Light top photo: dark title, no drop shadow, no dark shade at the top */
+  .piece-hero.is-light {
+    --color-on-photo: var(--color-on-light-photo);
+    --color-focus: var(--color-on-light-photo);
+    --photo-text-shadow: none;
+    --photo-text-shadow-small: none;
+  }
+
+  .piece-hero.is-light::after {
+    display: none;
   }
 
   .piece-hero-text .lead {
