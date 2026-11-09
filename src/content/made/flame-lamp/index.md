@@ -22,3 +22,5 @@ photos:
   - src: ./lamp-from-above.jpg
     alt: Looking straight down into the lit lamp. The jagged gold rim circles a glowing bulb held in the center by a three-armed holder.
 ---
+
+This was exploring how a flame might be depicted in the style of Art Deco.
