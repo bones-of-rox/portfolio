@@ -25,6 +25,7 @@ const { piece, newer, older } = Astro.props;
 const { title, summary, type, date, dateLabel, madeFor, materials, tools, size, cover, coverFocus, coverPlain, coverLight, photos, photoLayout, videos } =
   piece.data;
 const { Content } = await render(piece);
+const hasStory = Boolean(piece.body?.trim());
 const tone = coverPlain ? { tint: 'transparent', strength: 0 } : await coverTone(piece.id);
 
 const facts = [
@@ -63,17 +64,23 @@ const videoList = await Promise.all(
       />
       <div class="piece-hero-text container">
         <h1>{title}</h1>
-        <p class="lead">{summary}</p>
       </div>
     </header>
 
     <div class="container piece-main">
 
     <div class="piece-body">
-      <div class="piece-story">
-        <h2 class="visually-hidden">The story</h2>
-        <Content />
-      </div>
+      {
+        hasStory && (
+          <section class="piece-story" aria-labelledby="story-heading">
+            <!-- Same look as the Type and When labels -->
+            <h2 id="story-heading" class="story-label">Background</h2>
+            <div class="story-text">
+              <Content />
+            </div>
+          </section>
+        )
+      }
 
       <section class="facts" aria-labelledby="facts-heading">
         <!-- Heading stays for screen readers, hidden on screen -->
@@ -247,11 +254,6 @@ const videoList = await Promise.all(
     display: none;
   }
 
-  .piece-hero-text .lead {
-    color: var(--color-on-photo);
-    text-shadow: var(--photo-text-shadow-small);
-  }
-
   /* A lighter weight for the big project title */
   .piece-hero h1 {
     font-weight: var(--weight-light);
@@ -267,9 +269,32 @@ const videoList = await Promise.all(
       grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
       align-items: start;
     }
+
+    /* Line up the Background label with the Type label inside the facts box */
+    .piece-story {
+      padding-top: var(--space-6);
+    }
   }
 
   .piece-story {
+    display: grid;
+    gap: var(--space-1);
+    align-content: start;
+  }
+
+  /* Matches the Type and When labels in the facts box */
+  .story-label,
+  .fact dt {
+    font-family: var(--font-label);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+    line-height: var(--leading-normal);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    color: var(--color-highlight);
+  }
+
+  .story-text {
     display: grid;
     gap: var(--space-5);
     font-size: var(--text-lg);
@@ -298,15 +323,6 @@ const videoList = await Promise.all(
   .fact:last-child {
     padding-bottom: 0;
     border-bottom: 0;
-  }
-
-  .fact dt {
-    font-family: var(--font-label);
-    font-size: var(--text-sm);
-    font-weight: var(--weight-semibold);
-    letter-spacing: var(--tracking-wide);
-    text-transform: uppercase;
-    color: var(--color-highlight);
   }
 
   .fact dd {
