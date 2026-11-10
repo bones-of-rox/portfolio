@@ -14,8 +14,6 @@ coverFocus: 82% 50%
 # The render is pale, so the title and header use dark text, with no color wash
 coverPlain: true
 coverLight: true
-# Trying a white page with a soft shadow under the top image (2026-11-09)
-pageLight: true
 thumbnail:
   src: ./stik-thumbnail.jpg
   alt: A close crop of the Stik render. Two flat pieces lie side by side, each widening from a slim strap with two round holes into a broad, rounded paddle.

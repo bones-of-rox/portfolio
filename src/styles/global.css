@@ -83,6 +83,14 @@ body.header-over .site-header {
   text-shadow: var(--photo-text-shadow);
 }
 
+/* Over a dark top photo: light header text, even though the page below is white */
+body.header-over:not(.header-over-light) .site-header {
+  --color-text: var(--color-on-photo);
+  --color-header-rule: var(--color-on-photo-rule);
+  --color-accent: var(--color-on-photo-accent);
+  --color-focus: var(--color-on-photo-accent);
+}
+
 /* Over a light top photo: the header switches to dark text */
 body.header-over-light .site-header {
   --color-text: var(--color-on-light-photo);

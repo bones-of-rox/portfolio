@@ -131,6 +131,9 @@
 
   /* ---------- Text over photos (project page top photo) ---------- */
   --color-on-photo: var(--white);
+  /* The site header over a dark top photo keeps its light colors, even on the white project page */
+  --color-on-photo-rule: var(--gray-300);
+  --color-on-photo-accent: var(--orange-400);
   --photo-scrim-top: rgb(0 0 0 / 0.75);
   /* Light top photos (coverLight): dark text, no shadow. On the pale render: ink about 14:1, rule 5.5:1 */
   --color-on-light-photo: var(--gray-950);
@@ -163,8 +166,8 @@
 }
 
 /*
-  Light page (trying 2026-11-09 on Stik): a white page under the top photo.
-  Set with pageLight: true in a piece's front matter.
+  Light page (all project pages since 2026-11-10, per Donovan): a white page
+  under the top photo, with a soft shadow under the photo.
   Contrast on white: text 18.4, text-muted 7.4, accent 5.2, highlight 5.5, border-strong 5.0
 */
 .theme-light {
