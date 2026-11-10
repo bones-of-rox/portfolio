@@ -19,8 +19,6 @@ thumbnail:
   alt: A white snowflake magnet with six rounded arms on a stainless steel fridge.
 photoLayout: grid
 photos:
-  - src: ./magnets-top-down.jpg
-    alt: A rendering of the five magnets seen from straight above in plain pale gray on cream, in a row from a curved pinwheel to a six-armed snowflake.
   - src: ./magnets-in-a-row.jpg
     alt: Five white 3D-printed magnets in a row on a stainless steel fridge, from small flower shapes to a large swirling snowflake.
   - src: ./six-arm-snowflake.jpg
