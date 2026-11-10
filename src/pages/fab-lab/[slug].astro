@@ -22,7 +22,7 @@ interface Props {
 }
 
 const { piece, newer, older } = Astro.props;
-const { title, summary, type, date, dateLabel, madeFor, materials, tools, size, cover, coverFocus, coverPlain, coverLight, coverAlign, coverPad, photos, photoLayout, videos } =
+const { title, summary, type, date, dateLabel, madeFor, materials, tools, size, cover, coverFocus, coverPlain, coverLight, coverAlign, coverPad, callout, photos, photoLayout, videos } =
   piece.data;
 const { Content } = await render(piece);
 const hasStory = Boolean(piece.body?.trim());
@@ -114,6 +114,26 @@ const videoList = await Promise.all(
         </dl>
       </section>
     </div>
+
+    {
+      callout && (
+        <section class="callout" data-style={callout.style} aria-labelledby="callout-heading">
+          <h2 id="callout-heading" class:list={['callout-label', { 'visually-hidden': !callout.label }]}>
+            {callout.label ?? 'Highlight'}
+          </h2>
+          <p class="callout-text">{callout.text}</p>
+          {callout.image && (
+            <Image
+              src={callout.image.src}
+              alt={callout.image.alt}
+              widths={[480, 800, 1200]}
+              sizes="(min-width: 72rem) 72rem, 100vw"
+              class="callout-image"
+            />
+          )}
+        </section>
+      )
+    }
 
     {
       photos.length > 0 && (
@@ -338,8 +358,71 @@ const videoList = await Promise.all(
     align-content: start;
   }
 
+  /* ---------- Callout: a large pull-quote above the photos ----------
+     The color runs the full width of the window (border-image paints past the
+     content column without making the page scroll sideways); the text stays centered */
+  .callout {
+    display: grid;
+    justify-items: center;
+    gap: var(--space-4);
+    padding-block: var(--space-12);
+    text-align: center;
+    background-color: var(--callout-bg);
+    border-image: linear-gradient(var(--callout-bg), var(--callout-bg)) fill 0 / 0 / 0 100vw;
+    color: var(--callout-text);
+  }
+
+  @media (min-width: 40em) {
+    .callout {
+      padding-block: var(--space-24);
+    }
+  }
+
+  .callout-text {
+    max-width: 24ch;
+    margin: 0;
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: var(--text-3xl);
+    font-weight: var(--weight-regular);
+    line-height: var(--leading-tight);
+  }
+
+  /* An image inside the band (e.g. the Stik cut layout) spans the content width */
+  .callout-image {
+    width: 100%;
+    height: auto;
+    margin-top: var(--space-8);
+  }
+
+  .callout .callout-label {
+    color: var(--callout-label);
+  }
+
+  /* Paper (Donovan's pick, 2026-11-10): Cardo italic on the render's cream */
+  .callout[data-style='paper'] {
+    --callout-bg: var(--callout-paper-bg);
+    --callout-text: var(--callout-paper-text);
+    --callout-label: var(--callout-paper-label);
+  }
+
+  /* Dark: white on near-black */
+  .callout[data-style='dark'] {
+    --callout-bg: var(--callout-dark-bg);
+    --callout-text: var(--callout-dark-text);
+    --callout-label: var(--callout-dark-label);
+  }
+
+  /* Accent: white on the deep teal */
+  .callout[data-style='accent'] {
+    --callout-bg: var(--callout-accent-bg);
+    --callout-text: var(--callout-accent-text);
+    --callout-label: var(--callout-accent-label);
+  }
+
   /* Matches the Type and When labels in the facts box */
   .story-label,
+  .callout-label,
   .fact dt {
     font-family: var(--font-label);
     font-size: var(--text-sm);

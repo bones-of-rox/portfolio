@@ -39,6 +39,15 @@ const made = defineCollection({
       // with the left and right edges of the text below at every screen size.
       coverAlign: z.enum(['full', 'content']).default('full'),
       coverPad: z.number().min(0).default(0),
+      // Large pull-quote above the photos, e.g. the design challenge
+      callout: z
+        .object({
+          label: z.string().optional(), // small label above, e.g. "The challenge"
+          text: z.string(),
+          style: z.enum(['paper', 'dark', 'accent']).default('paper'),
+          image: photo.optional(), // shown under the text, inside the colored band (use a transparent PNG)
+        })
+        .optional(),
       thumbnail: photo.optional(), // gallery tile (4:5); falls back to cover
       photos: z.array(photo).default([]),
       // mixed: tall photos as 4:5 tiles, wide photos span the row
