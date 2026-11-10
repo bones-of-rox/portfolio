@@ -169,11 +169,9 @@
   --callout-paper-bg: var(--cream-200);
   --callout-paper-text: var(--gray-950);
   --callout-paper-label: var(--teal-800);
-  --callout-paper-rule: var(--orange-700);
   --callout-accent-bg: var(--teal-700);
   --callout-accent-text: var(--white);
   --callout-accent-label: var(--white);
-  --callout-rule-width: 6px;
 
   /* ---------- Homepage ---------- */
   --brand-logo-size: 7rem; /* logos are sized to roughly equal area around this */

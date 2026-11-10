@@ -20,7 +20,7 @@ thumbnail:
 callout:
   label: The challenge
   text: What if the design had almost no waste…
-  style: dark
+  style: paper
 photos:
   - src: ./stik-cut-layout.png
     alt: The cutting layout for Stik, a long row of spatula shapes in tan on white, nested head to tail so their S-curves fit together. Each paddle tapers into a slim strap with two small holes at its end.
