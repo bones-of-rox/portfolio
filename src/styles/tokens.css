@@ -29,6 +29,8 @@
   --orange-700: #c2410c;
   --orange-800: #9a3412;
   --teal-700: #0f766e;
+  --teal-800: #115e59;
+  --cream-200: #ebe5d8; /* matches the paper in Donovan's pale renders */
 
   /* ---------- Color: semantic ----------
      Contrast against --color-bg (WCAG 2.2 AA needs 4.5:1 for text, 3:1 for UI):
@@ -158,6 +160,20 @@
   --back-button-bg: rgb(255 255 255 / 0.1);
   --back-button-bg-hover: rgb(255 255 255 / 0.2);
   --back-button-blur: 12px;
+
+  /* ---------- Callout (large pull-quote on a project page, trying on Stik 2026-11-10) ----------
+     Contrast: dark 18.4 text / 10.2 label; paper 15.0 text / 5.8 label; accent 5.5 text and label */
+  --callout-dark-bg: var(--gray-950);
+  --callout-dark-text: var(--white);
+  --callout-dark-label: var(--teal-300);
+  --callout-paper-bg: var(--cream-200);
+  --callout-paper-text: var(--gray-950);
+  --callout-paper-label: var(--teal-800);
+  --callout-paper-rule: var(--orange-700);
+  --callout-accent-bg: var(--teal-700);
+  --callout-accent-text: var(--white);
+  --callout-accent-label: var(--white);
+  --callout-rule-width: 6px;
 
   /* ---------- Homepage ---------- */
   --brand-logo-size: 7rem; /* logos are sized to roughly equal area around this */

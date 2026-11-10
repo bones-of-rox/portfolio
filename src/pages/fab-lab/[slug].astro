@@ -22,7 +22,7 @@ interface Props {
 }
 
 const { piece, newer, older } = Astro.props;
-const { title, summary, type, date, dateLabel, madeFor, materials, tools, size, cover, coverFocus, coverPlain, coverLight, photos, photoLayout, videos } =
+const { title, summary, type, date, dateLabel, madeFor, materials, tools, size, cover, coverFocus, coverPlain, coverLight, callout, photos, photoLayout, videos } =
   piece.data;
 const { Content } = await render(piece);
 const hasStory = Boolean(piece.body?.trim());
@@ -97,6 +97,17 @@ const videoList = await Promise.all(
         </dl>
       </section>
     </div>
+
+    {
+      callout && (
+        <section class="callout" data-style={callout.style} aria-labelledby="callout-heading">
+          <h2 id="callout-heading" class:list={['callout-label', { 'visually-hidden': !callout.label }]}>
+            {callout.label ?? 'Highlight'}
+          </h2>
+          <p class="callout-text">{callout.text}</p>
+        </section>
+      )
+    }
 
     {
       photos.length > 0 && (
@@ -284,8 +295,74 @@ const videoList = await Promise.all(
     align-content: start;
   }
 
+  /* ---------- Callout: a large pull-quote above the photos ---------- */
+  .callout {
+    display: grid;
+    gap: var(--space-4);
+    padding: var(--space-10) var(--space-6);
+    border-radius: var(--radius-lg);
+    background-color: var(--callout-bg);
+    color: var(--callout-text);
+  }
+
+  @media (min-width: 40em) {
+    .callout {
+      padding: var(--space-16) var(--space-12);
+    }
+  }
+
+  .callout-text {
+    max-width: 20ch;
+    margin: 0;
+    font-family: var(--font-heading);
+    font-size: var(--text-4xl);
+    font-weight: var(--weight-light);
+    line-height: var(--leading-tight);
+    letter-spacing: var(--tracking-tight);
+  }
+
+  .callout .callout-label {
+    color: var(--callout-label);
+  }
+
+  /* Dark band: white Montserrat on near-black */
+  .callout[data-style='dark'] {
+    --callout-bg: var(--callout-dark-bg);
+    --callout-text: var(--callout-dark-text);
+    --callout-label: var(--callout-dark-label);
+  }
+
+  /* Paper: Cardo italic on the render's cream, with an orange rule on the left */
+  .callout[data-style='paper'] {
+    --callout-bg: var(--callout-paper-bg);
+    --callout-text: var(--callout-paper-text);
+    --callout-label: var(--callout-paper-label);
+    border-left: var(--callout-rule-width) solid var(--callout-paper-rule);
+  }
+
+  .callout[data-style='paper'] .callout-text {
+    max-width: 24ch;
+    font-family: var(--font-body);
+    font-style: italic;
+    font-weight: var(--weight-regular);
+    font-size: var(--text-3xl);
+    letter-spacing: normal;
+  }
+
+  /* Accent: white Montserrat on the deep teal */
+  .callout[data-style='accent'] {
+    --callout-bg: var(--callout-accent-bg);
+    --callout-text: var(--callout-accent-text);
+    --callout-label: var(--callout-accent-label);
+  }
+
+  .callout[data-style='accent'] .callout-text {
+    font-weight: var(--weight-medium);
+  }
+
   /* Matches the Type and When labels in the facts box */
   .story-label,
+  .callout-label,
   .fact dt {
     font-family: var(--font-label);
     font-size: var(--text-sm);

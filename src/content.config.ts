@@ -33,6 +33,14 @@ const made = defineCollection({
       coverPlain: z.boolean().default(false),
       // true: the top photo is light (e.g. a pale render), so the title and site header switch to dark text
       coverLight: z.boolean().default(false),
+      // Large pull-quote above the photos, e.g. the design challenge
+      callout: z
+        .object({
+          label: z.string().optional(), // small label above, e.g. "The challenge"
+          text: z.string(),
+          style: z.enum(['dark', 'paper', 'accent']).default('dark'),
+        })
+        .optional(),
       thumbnail: photo.optional(), // gallery tile (4:5); falls back to cover
       photos: z.array(photo).default([]),
       // mixed: tall photos as 4:5 tiles, wide photos span the row
