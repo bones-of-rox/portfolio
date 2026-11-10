@@ -141,7 +141,14 @@ const videoList = await Promise.all(
           <h2 id="photos-heading" class="visually-hidden">Photos</h2>
           <ul class:list={['photo-grid', { 'photo-grid-even': photoLayout === 'grid' }]} role="list">
             {photos.map((photo) => (
-              <li class={photoLayout === 'mixed' && photo.src.width > photo.src.height ? 'tile tile-wide' : 'tile'}>
+              <li
+                class={
+                  (photoLayout === 'mixed' && photo.src.width > photo.src.height) ||
+                  (photoLayout === 'grid' && photo.src.width > photo.src.height * 1.5)
+                    ? 'tile tile-wide'
+                    : 'tile'
+                }
+              >
                 <figure>
                   <Image
                     src={photo.src}
@@ -525,6 +532,15 @@ const videoList = await Promise.all(
 
   .photo-grid-even .tile .photo {
     aspect-ratio: 1;
+  }
+
+  /* In the even grid, panoramic photos (more than 1.5 times as wide as tall) get a full row, uncropped */
+  .photo-grid-even .tile-wide {
+    grid-column: 1 / -1;
+  }
+
+  .photo-grid-even .tile-wide .photo {
+    aspect-ratio: auto;
   }
 
   @media (min-width: 40em) {
