@@ -5,13 +5,18 @@ type: 3D print
 date: 2025-12-15
 dateLabel: Christmas 2025
 cover:
-  src: ./magnets-in-a-row.jpg
-  alt: Five white 3D-printed magnets in a row on a stainless steel fridge, from small flower shapes to a large swirling snowflake.
+  src: ./magnets-render.jpg
+  alt: A rendering of five of the magnets in a row in plain pale gray on a textured cream background, each a different flower or snowflake design, from a curved pinwheel to a six-armed snowflake.
+# The render is pale, so the title and header use dark text, with no color wash
+coverPlain: true
+coverLight: true
 thumbnail:
   src: ./snowflake-thumbnail.jpg
   alt: A white snowflake magnet with six rounded arms on a stainless steel fridge.
 photoLayout: grid
 photos:
+  - src: ./magnets-in-a-row.jpg
+    alt: Five white 3D-printed magnets in a row on a stainless steel fridge, from small flower shapes to a large swirling snowflake.
   - src: ./six-arm-snowflake.jpg
     alt: A white snowflake magnet with six rounded arms radiating from a layered, star-shaped center.
   - src: ./pinwheel-snowflake.jpg
