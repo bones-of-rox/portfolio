@@ -39,6 +39,7 @@ const made = defineCollection({
           label: z.string().optional(), // small label above, e.g. "The challenge"
           text: z.string(),
           style: z.enum(['paper', 'dark', 'accent']).default('paper'),
+          image: photo.optional(), // shown under the text, inside the colored band (use a transparent PNG)
         })
         .optional(),
       thumbnail: photo.optional(), // gallery tile (4:5); falls back to cover

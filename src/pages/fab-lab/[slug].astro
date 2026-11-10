@@ -105,6 +105,15 @@ const videoList = await Promise.all(
             {callout.label ?? 'Highlight'}
           </h2>
           <p class="callout-text">{callout.text}</p>
+          {callout.image && (
+            <Image
+              src={callout.image.src}
+              alt={callout.image.alt}
+              widths={[480, 800, 1200]}
+              sizes="(min-width: 72rem) 72rem, 100vw"
+              class="callout-image"
+            />
+          )}
         </section>
       )
     }
@@ -323,6 +332,13 @@ const videoList = await Promise.all(
     font-size: var(--text-3xl);
     font-weight: var(--weight-regular);
     line-height: var(--leading-tight);
+  }
+
+  /* An image inside the band (e.g. the Stik cut layout) spans the content width */
+  .callout-image {
+    width: 100%;
+    height: auto;
+    margin-top: var(--space-8);
   }
 
   .callout .callout-label {
