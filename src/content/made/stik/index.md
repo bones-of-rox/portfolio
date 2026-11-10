@@ -17,6 +17,9 @@ coverLight: true
 thumbnail:
   src: ./stik-thumbnail.jpg
   alt: A close crop of the Stik render. Two flat pieces lie side by side, each widening from a slim strap with two round holes into a broad, rounded paddle.
+photos:
+  - src: ./stik-cut-layout.png
+    alt: The cutting layout for Stik, a long row of spatula shapes in tan on white, nested head to tail so their S-curves fit together. Each paddle tapers into a slim strap with two small holes at its end.
 ---
 
 This piece aims to satisfy the problem of finding a place to put a spatula or wooden spoon when you're done using it. I found traditional spoon holders messy. And I was obsessed with these rare earth magnets at the time and thought they could provide a clever way of attaching this spatula to the pot where it was needed, or even the overhead exhaust.
