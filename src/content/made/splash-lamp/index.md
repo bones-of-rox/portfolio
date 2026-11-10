@@ -17,3 +17,5 @@ thumbnail:
   src: ./splash-lamp-thumbnail.jpg
   alt: A close crop of the Splash Lamp render, showing its twisting folds rising from a round base and opening into wavy, pointed tips.
 ---
+
+With this lamp, I was exploring a more fluid, organic form.
