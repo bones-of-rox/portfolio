@@ -33,6 +33,12 @@ const made = defineCollection({
       coverPlain: z.boolean().default(false),
       // true: the top photo is light (e.g. a pale render), so the title and site header switch to dark text
       coverLight: z.boolean().default(false),
+      // 'content': the top image is sized to the text column instead of filling the window, on a
+      // paper texture that runs edge to edge. Crop the image so the object spans its middle, with
+      // coverPad (a share of the object's width) of paper on each side; the object then lines up
+      // with the left and right edges of the text below at every screen size.
+      coverAlign: z.enum(['full', 'content']).default('full'),
+      coverPad: z.number().min(0).default(0),
       thumbnail: photo.optional(), // gallery tile (4:5); falls back to cover
       photos: z.array(photo).default([]),
       // mixed: tall photos as 4:5 tiles, wide photos span the row

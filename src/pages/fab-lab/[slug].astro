@@ -22,7 +22,7 @@ interface Props {
 }
 
 const { piece, newer, older } = Astro.props;
-const { title, summary, type, date, dateLabel, madeFor, materials, tools, size, cover, coverFocus, coverPlain, coverLight, photos, photoLayout, videos } =
+const { title, summary, type, date, dateLabel, madeFor, materials, tools, size, cover, coverFocus, coverPlain, coverLight, coverAlign, coverPad, photos, photoLayout, videos } =
   piece.data;
 const { Content } = await render(piece);
 const hasStory = Boolean(piece.body?.trim());
@@ -50,18 +50,35 @@ const videoList = await Promise.all(
   <article class="piece">
     <!-- Top photo runs edge to edge and up under the site header, with the title on it -->
     <header
-      class:list={['piece-hero', { 'is-plain': coverPlain, 'is-light': coverLight }]}
-      style={`--cover-tint: ${tone.tint}; --cover-tint-strength: ${tone.strength}; --cover-focus: ${coverFocus ?? '50% 50%'}`}
+      class:list={['piece-hero', { 'is-plain': coverPlain, 'is-light': coverLight, 'is-content': coverAlign === 'content' }]}
+      style={`--cover-tint: ${tone.tint}; --cover-tint-strength: ${tone.strength}; --cover-focus: ${coverFocus ?? '50% 50%'}; --cover-pad: ${coverPad}; --hero-paper: url(${url('/textures/paper.jpg')})`}
     >
-      <Image
-        src={cover.src}
-        alt={cover.alt}
-        widths={[480, 800, 1200, 1600, 2400]}
-        sizes="100vw"
-        class="piece-cover"
-        loading="eager"
-        fetchpriority="high"
-      />
+      {
+        /* Sized to the text column, so the object lines up with the text edges below */
+        coverAlign === 'content' ? (
+          <div class="piece-cover-frame container">
+            <Image
+              src={cover.src}
+              alt={cover.alt}
+              widths={[480, 800, 1200, 1600, 2400]}
+              sizes="(min-width: 80em) 1400px, 130vw"
+              class="piece-cover-inset"
+              loading="eager"
+              fetchpriority="high"
+            />
+          </div>
+        ) : (
+          <Image
+            src={cover.src}
+            alt={cover.alt}
+            widths={[480, 800, 1200, 1600, 2400]}
+            sizes="100vw"
+            class="piece-cover"
+            loading="eager"
+            fetchpriority="high"
+          />
+        )
+      }
       <div class="piece-hero-text container">
         <h1>{title}</h1>
       </div>
@@ -209,6 +226,43 @@ const videoList = await Promise.all(
     height: 100%;
     object-fit: cover;
     object-position: var(--cover-focus);
+  }
+
+  /* coverAlign: content. Paper texture fills the window; the image sits in the text column.
+     The image is wider than the column by its paper padding, pulled left by the same amount,
+     and its edges fade into the paper so no seam shows. */
+  .piece-hero.is-content {
+    background-color: var(--color-paper);
+    background-image: var(--hero-paper);
+    /* Scale the paper grain to match the image: the 480px tile was cut from a 1800px-wide render */
+    background-size: calc(
+        (min(100vw, var(--content-max)) - 2 * var(--gutter)) * (1 + 2 * var(--cover-pad)) * 480 / 1800
+      )
+      auto;
+  }
+
+  .piece-cover-frame {
+    position: absolute;
+    inset-inline: 0;
+    top: 50%;
+    z-index: -3;
+    transform: translateY(-50%);
+  }
+
+  .piece-cover-inset {
+    display: block;
+    width: calc(100% * (1 + 2 * var(--cover-pad)));
+    max-width: none;
+    height: auto;
+    margin-left: calc(-100% * var(--cover-pad));
+    -webkit-mask-image:
+      linear-gradient(to right, transparent, var(--mask-opaque) 8%, var(--mask-opaque) 92%, transparent),
+      linear-gradient(to bottom, transparent, var(--mask-opaque) 20%, var(--mask-opaque) 80%, transparent);
+    -webkit-mask-composite: source-in;
+    mask-image:
+      linear-gradient(to right, transparent, var(--mask-opaque) 8%, var(--mask-opaque) 92%, transparent),
+      linear-gradient(to bottom, transparent, var(--mask-opaque) 20%, var(--mask-opaque) 80%, transparent);
+    mask-composite: intersect;
   }
 
   /* Soft wash in the photo's own tone: turns bright whites a gentle color */

@@ -10,6 +10,10 @@ cover:
 # The render is pale, so the title and header use dark text, with no color wash
 coverPlain: true
 coverLight: true
+# Magnets line up with the left and right edges of the text: the render is cropped with 200px of
+# paper on each side of the 1400px row of magnets
+coverAlign: content
+coverPad: 0.142857
 thumbnail:
   src: ./snowflake-thumbnail.jpg
   alt: A white snowflake magnet with six rounded arms on a stainless steel fridge.
