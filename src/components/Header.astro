@@ -17,6 +17,7 @@ const onHome = Astro.url.pathname === home || Astro.url.pathname === `${home}/`;
             <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false">
               <path d="M19 12H5M11 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
             </svg>
+            <span class="back-label">Back</span>
           </a>
         )
       }
@@ -52,22 +53,36 @@ const onHome = Astro.url.pathname === home || Astro.url.pathname === `${home}/`;
     color: var(--color-accent);
   }
 
-  /* Back to the gallery: a square, rounded, white frosted-glass button (10%) with a left arrow */
+  /* Back to the gallery: a plain left arrow with the word "Back" beside it, no background.
+     Color follows the header text: dark over pale renders, white over dark photos */
   .back-button {
     margin-top: var(--space-4);
-    display: inline-grid;
-    place-items: center;
-    width: var(--back-button-size);
-    height: var(--back-button-size);
-    border-radius: var(--radius-md);
-    background-color: var(--back-button-bg);
-    -webkit-backdrop-filter: blur(var(--back-button-blur));
-    backdrop-filter: blur(var(--back-button-blur));
-    color: var(--color-text); /* white over dark photos, dark over pale renders */
-    transition: background-color var(--duration-fast) var(--ease-out);
+    display: inline-flex;
+    align-items: center;
+    gap: var(--back-button-gap);
+    min-height: var(--target-min);
+    padding-inline-end: var(--space-2);
+    font-family: var(--font-label);
+    font-size: var(--text-base);
+    font-weight: var(--weight-semibold);
+    letter-spacing: var(--tracking-wide);
+    color: var(--color-text);
+    text-decoration: none;
   }
 
-  .back-button:hover {
-    background-color: var(--back-button-bg-hover);
+  .back-button svg {
+    flex: none;
+    transition: transform var(--duration-fast) var(--ease-out);
+  }
+
+  .back-button:hover .back-label {
+    text-decoration: underline;
+    text-underline-offset: var(--underline-offset);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .back-button:hover svg {
+      transform: translateX(calc(-1 * var(--space-1)));
+    }
   }
 </style>

@@ -156,12 +156,9 @@
   --hero-height: 80svh;
   --hero-shadow: none; /* the light page adds a soft shadow under the top photo */
 
-  /* Back button (project pages): white frosted glass at 10%, so the photo shows through.
-     The arrow follows the header text color: white over dark photos, dark over pale renders (coverLight) */
-  --back-button-size: var(--target-min);
-  --back-button-bg: rgb(255 255 255 / 0.1);
-  --back-button-bg-hover: rgb(255 255 255 / 0.2);
-  --back-button-blur: 12px;
+  /* Back button (project pages): a plain arrow plus the word "Back", no background (2026-11-11).
+     It uses the header text color: near-black over pale renders, white over dark photos */
+  --back-button-gap: var(--space-1);
 
   /* ---------- Callout (large pull-quote on a project page, trying on Stik 2026-11-10) ----------
      Contrast: dark 18.4 text / 10.2 label; paper 15.0 text / 5.8 label; accent 5.5 text and label */
