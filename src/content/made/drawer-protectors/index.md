@@ -5,12 +5,18 @@ type: 3D print
 date: 2025-06-01
 dateLabel: "2025"
 cover:
-  src: ./protector-on-drawer-wide.jpg
-  alt: A black 3D-printed cap fitted over the top corner of a dark wood kitchen drawer, its angled facets wrapping both edges, next to a stainless steel fridge.
+  src: ./protector-render.jpg
+  alt: A rendering in plain pale gray on a textured cream background of the cap fitted over the top corner of a drawer, its angled arm running along the drawer's top edge and a short leg wrapping down the side.
+coverFocus: 75% 50%
+# The render is pale, so the title and header use dark text, with no color wash
+coverPlain: true
+coverLight: true
 thumbnail:
   src: ./protector-thumbnail.jpg
   alt: A black 3D-printed cap fitted over the top corner of a dark wood kitchen drawer.
 photos:
+  - src: ./protector-on-drawer-wide.jpg
+    alt: A black 3D-printed cap fitted over the top corner of a dark wood kitchen drawer, its angled facets wrapping both edges, next to a stainless steel fridge.
   - src: ./cat-scratching.jpg
     alt: A gray cat with white paws stretched up on his hind legs, clawing at the edge of a kitchen drawer above his scratching post.
   - src: ./scratched-drawer.jpg
