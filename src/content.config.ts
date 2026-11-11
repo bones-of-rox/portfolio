@@ -53,6 +53,8 @@ const made = defineCollection({
       // mixed: tall photos as 4:5 tiles, wide photos span the row
       // grid: every photo as an even square tile (good for a series of similar objects)
       photoLayout: z.enum(['mixed', 'grid']).default('mixed'),
+      // Photos shown full width at the very bottom of the page, after the videos
+      closingPhotos: z.array(photo).default([]),
       videos: z
         .array(
           z.object({

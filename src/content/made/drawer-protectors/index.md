@@ -15,12 +15,13 @@ thumbnail:
   src: ./protector-thumbnail.jpg
   alt: A black 3D-printed cap fitted over the top corner of a dark wood kitchen drawer.
 photos:
-  - src: ./protector-on-drawer-wide.jpg
-    alt: A black 3D-printed cap fitted over the top corner of a dark wood kitchen drawer, its angled facets wrapping both edges, next to a stainless steel fridge.
   - src: ./cat-scratching.jpg
     alt: A gray cat with white paws stretched up on his hind legs, clawing at the edge of a kitchen drawer above his scratching post.
   - src: ./scratched-drawer.jpg
     alt: An open kitchen drawer whose gray painted top edge is scratched and scuffed down to bare wood by cat claws.
+closingPhotos:
+  - src: ./protector-on-drawer-wide.jpg
+    alt: A black 3D-printed cap fitted over the top corner of a dark wood kitchen drawer, its angled facets wrapping both edges, next to a stainless steel fridge.
 videos:
   - src: first-prototype
     poster: ./first-prototype-poster.jpg

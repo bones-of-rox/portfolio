@@ -22,7 +22,7 @@ interface Props {
 }
 
 const { piece, newer, older } = Astro.props;
-const { title, summary, type, date, dateLabel, madeFor, materials, tools, size, cover, coverFocus, coverPlain, coverLight, coverAlign, coverPad, callout, photos, photoLayout, videos } =
+const { title, summary, type, date, dateLabel, madeFor, materials, tools, size, cover, coverFocus, coverPlain, coverLight, coverAlign, coverPad, callout, photos, photoLayout, videos, closingPhotos } =
   piece.data;
 const { Content } = await render(piece);
 const hasStory = Boolean(piece.body?.trim());
@@ -196,6 +196,30 @@ const videoList = await Promise.all(
             </section>
           ))}
         </div>
+      )
+    }
+
+    {
+      closingPhotos.length > 0 && (
+        <section class="photos" aria-labelledby="closing-photos-heading">
+          <h2 id="closing-photos-heading" class="visually-hidden">More photos</h2>
+          <ul class="photo-grid" role="list">
+            {closingPhotos.map((photo) => (
+              <li class="tile tile-wide">
+                <figure>
+                  <Image
+                    src={photo.src}
+                    alt={photo.alt}
+                    widths={[480, 800, 1200, 1600]}
+                    sizes="(min-width: 72rem) 72rem, 100vw"
+                    class="photo"
+                  />
+                  {photo.caption && <figcaption>{photo.caption}</figcaption>}
+                </figure>
+              </li>
+            ))}
+          </ul>
+        </section>
       )
     }
 
