@@ -54,7 +54,7 @@ const onHome = Astro.url.pathname === home || Astro.url.pathname === `${home}/`;
   }
 
   /* Back to the gallery: a plain left arrow with the word "Back" beside it, no background.
-     Color follows the header text: dark over pale renders, white over dark photos */
+     Medium gray over pale renders so it stays quiet, full black on hover; white over dark photos */
   .back-button {
     margin-top: var(--space-4);
     display: inline-flex;
@@ -66,8 +66,13 @@ const onHome = Astro.url.pathname === home || Astro.url.pathname === `${home}/`;
     font-size: var(--text-base);
     font-weight: var(--weight-semibold);
     letter-spacing: var(--tracking-wide);
-    color: var(--color-text);
+    color: var(--back-button-color);
     text-decoration: none;
+    transition: color var(--duration-fast) var(--ease-out);
+  }
+
+  .back-button:hover {
+    color: var(--back-button-color-hover);
   }
 
   .back-button svg {

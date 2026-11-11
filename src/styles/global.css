@@ -98,6 +98,8 @@ body.header-over-light .site-header {
   --color-accent: var(--color-on-light-photo);
   --color-focus: var(--color-on-light-photo);
   --color-header-rule: var(--color-on-light-photo-rule);
+  --back-button-color: var(--gray-600); /* lightest gray that keeps AA (about 4.6:1) on the cream renders */
+  --back-button-color-hover: var(--color-on-light-photo);
   text-shadow: none;
 }
 
