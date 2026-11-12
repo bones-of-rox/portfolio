@@ -72,7 +72,6 @@ body.bg-plain::after {
 /* Charcoal page (homepage): film grain over a warm glow over charcoal. No scroll fade. */
 body.theme-charcoal::before {
   background:
-    var(--texture-grain) 0 0 / var(--grain-size) var(--grain-size) repeat,
     var(--glow),
     var(--color-bg);
 }
