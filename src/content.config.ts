@@ -19,7 +19,7 @@ const made = defineCollection({
     return z.object({
       title: z.string(),
       summary: z.string(),
-      type: z.enum(['3D print', 'Furniture', 'Other']),
+      type: z.enum(['3D print', 'Furniture', 'Utensil', 'Other']),
       date: z.coerce.date(), // used for sorting, newest first
       dateLabel: z.string().optional(), // how the date reads on the page, e.g. "Fall 2025"
       madeFor: z.string().optional(),

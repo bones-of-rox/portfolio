@@ -1,7 +1,7 @@
 ---
 title: Stik
 summary: A wooden spatula that sticks to the pot or the range hood with rare earth magnets.
-type: Other
+type: Utensil
 date: 2010-01-15
 dateLabel: Winter 2010
 materials:
