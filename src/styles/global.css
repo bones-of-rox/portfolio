@@ -69,6 +69,18 @@ body.bg-plain::after {
   display: none;
 }
 
+/* Charcoal page (homepage): film grain over a warm glow over charcoal. No scroll fade. */
+body.theme-charcoal::before {
+  background:
+    var(--texture-grain) 0 0 / var(--grain-size) var(--grain-size) repeat,
+    var(--glow),
+    var(--color-bg);
+}
+
+body.theme-charcoal::after {
+  display: none;
+}
+
 /* Site header laid over the top of the page, e.g. over a full-bleed photo */
 body.header-over {
   position: relative;

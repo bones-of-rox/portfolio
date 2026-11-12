@@ -211,14 +211,25 @@
 }
 
 /*
-  Charcoal page (homepage preview 2026-11-12): flat charcoal instead of the wood,
-  with a soft drop shadow under each tile.
+  Charcoal page (homepage since 2026-11-12, per Donovan): charcoal with fine film
+  grain and a warm orange glow from the top-right corner, instead of the wood,
+  and a soft drop shadow under each tile.
+  --texture-grain is set in BaseLayout, because its address depends on the base path.
+  Brightest point of the glow is about #684336: text still 7.3 there.
   Contrast on #30302e: text 11.3, text-muted 5.7, accent 5.5, highlight 7.4, border-strong 3.4
 */
 .theme-charcoal {
   --color-bg: var(--charcoal-700);
   --color-bg-fade: var(--charcoal-700);
   --color-border-strong: var(--gray-450);
+  --grain-size: 128px;
+  --glow:
+    radial-gradient(
+      ellipse 90% 70% at 100% 0%,
+      rgb(255 133 82 / 0.22),
+      rgb(255 133 82 / 0.07) 45%,
+      transparent 75%
+    );
   --card-shadow:
     0 2px 4px rgb(0 0 0 / 0.25),
     0 10px 24px rgb(0 0 0 / 0.35);
