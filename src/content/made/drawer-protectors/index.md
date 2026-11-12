@@ -1,5 +1,5 @@
 ---
-title: Drawer protectors
+title: Drawer Protectors
 summary: 3D-printed caps that protect our kitchen drawers from a hungry cat's claws.
 type: 3D print
 date: 2025-06-01

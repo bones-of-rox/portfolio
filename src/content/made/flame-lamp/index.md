@@ -1,5 +1,5 @@
 ---
-title: Flame lamp
+title: Flame Lamp
 summary: A 3D-printed desk lamp shaped like a flickering flame.
 type: 3D print
 date: 2026-11-01

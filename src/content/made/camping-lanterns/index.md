@@ -1,5 +1,5 @@
 ---
-title: Camping lanterns
+title: Camping Lanterns
 summary: A few rechargeable lanterns that make a campsite feel more inviting and cozy.
 type: 3D print
 date: 2026-04-01
