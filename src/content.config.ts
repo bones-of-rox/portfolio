@@ -1,6 +1,7 @@
 import { defineCollection } from 'astro:content';
 import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
+import { categories } from './categories';
 
 /*
   Made: one folder per piece in src/content/made/<slug>/ holding index.md
@@ -20,6 +21,8 @@ const made = defineCollection({
       title: z.string(),
       summary: z.string(),
       type: z.enum(['3D print', 'Furniture', 'Utensil', 'Other']),
+      // Which homepage filters show this piece, e.g. [Lighting] or [Lighting, Kitchen]
+      categories: z.array(z.enum(categories)).default([]),
       date: z.coerce.date(), // used for sorting, newest first
       dateLabel: z.string().optional(), // how the date reads on the page, e.g. "Fall 2025"
       madeFor: z.string().optional(),
