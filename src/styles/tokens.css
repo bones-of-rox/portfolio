@@ -30,6 +30,8 @@
   --orange-800: #9a3412;
   --teal-700: #0f766e;
   --teal-800: #115e59;
+  --charcoal-700: #30302e; /* close to the Claude app's dark text field (preview 2026-11-12) */
+  --gray-450: #808088;
   --cream-200: #ebe5d8; /* matches the paper in Donovan's pale renders */
 
   /* ---------- Color: semantic ----------
@@ -154,7 +156,8 @@
     0 0 10px rgb(0 0 0 / 0.6),
     0 2px 22px rgb(0 0 0 / 0.4);
   --hero-height: 80svh;
-  --hero-shadow: none; /* the light page adds a soft shadow under the top photo */
+  --hero-shadow: none;
+  --card-shadow: none; /* soft shadow under gallery tiles (charcoal page) */ /* the light page adds a soft shadow under the top photo */
 
   /* Back button (project pages): a plain arrow plus the word "Back", no background (2026-11-11).
      Over pale renders it is medium gray (full black on hover); over dark photos it uses the header text color */
@@ -205,6 +208,31 @@
   --hero-shadow:
     0 2px 6px rgb(0 0 0 / 0.16),
     0 12px 32px rgb(0 0 0 / 0.24);
+}
+
+/*
+  Charcoal page (homepage since 2026-11-12, per Donovan): charcoal with fine film
+  grain and a warm orange glow from the top-right corner, instead of the wood,
+  and a soft drop shadow under each tile.
+  --texture-grain is set in BaseLayout, because its address depends on the base path.
+  Brightest point of the glow is about #684336: text still 7.3 there.
+  Contrast on #30302e: text 11.3, text-muted 5.7, accent 5.5, highlight 7.4, border-strong 3.4
+*/
+.theme-charcoal {
+  --color-bg: var(--charcoal-700);
+  --color-bg-fade: var(--charcoal-700);
+  --color-border-strong: var(--gray-450);
+  --grain-size: 128px;
+  --glow:
+    radial-gradient(
+      ellipse 90% 70% at 100% 0%,
+      rgb(255 133 82 / 0.22),
+      rgb(255 133 82 / 0.07) 45%,
+      transparent 75%
+    );
+  --card-shadow:
+    0 2px 4px rgb(0 0 0 / 0.25),
+    0 10px 24px rgb(0 0 0 / 0.35);
 }
 
 @media (min-width: 40em) {
