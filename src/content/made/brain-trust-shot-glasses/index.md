@@ -13,8 +13,8 @@ coverFocus: 75% 50%
 coverPlain: true
 coverLight: true
 thumbnail:
-  src: ./3d-model-thumbnail.jpg
-  alt: The 3D model of the shot glass shown as a see-through wireframe, with a faceted rim and long ribs flowing down to the base.
+  src: ./single-glass.jpg
+  alt: A single black 3D-printed shot glass on a wooden counter top, with a faceted rim and smooth ribs flowing down to a rippled base.
 photos:
   - src: ./four-glasses-wide.jpg
     alt: Four black 3D-printed shot glasses lined up on a gold-flecked counter in low light, which catches the ribs flowing down each glass.
