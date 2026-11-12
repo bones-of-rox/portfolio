@@ -118,4 +118,29 @@ const sizes = '(min-width: 64em) 22rem, (min-width: 40em) 33vw, 50vw';
   .card-link:focus-visible .card-title {
     text-decoration-color: var(--color-accent);
   }
+
+  /*
+    Mouse screens (2026-11-12, per Donovan): the white caption is tucked away below
+    the photo and slides up from the bottom on hover or keyboard focus.
+    Touch screens can't hover, so they keep the caption showing all the time.
+    The title stays in the link for screen readers either way.
+  */
+  @media (hover: hover) and (pointer: fine) {
+    .card-link {
+      position: relative;
+      grid-template-rows: auto;
+    }
+
+    .card-caption {
+      position: absolute;
+      inset: auto 0 0;
+      transform: translateY(calc(100% + 2px)); /* the extra 2px stops a hairline of white peeking out */
+      transition: transform var(--duration-medium) var(--ease-out);
+    }
+
+    .card-link:hover .card-caption,
+    .card-link:focus-visible .card-caption {
+      transform: translateY(0);
+    }
+  }
 </style>
