@@ -1,20 +1,60 @@
 ---
 /*
-  Placeholder filters: they look and focus like real ones but don't filter yet.
-  When they're wired up, each button will show or hide pieces by category.
+  Filter chips for the project grid. "All" shows everything; each other chip shows only the
+  pieces tagged with that category in their index.md (categories: [Lighting]). Only one chip
+  is on at a time, and pressing the chip that's already on goes back to All.
+  The chip names come from src/categories.ts.
 */
-const filters = ['All', '3D prints', 'Furniture', 'Gifts', 'Outdoors'];
+import { categories } from '../categories';
+
+const filters = ['All', ...categories];
 ---
 
 <div class="filter-bar" role="group" aria-label="Filter projects">
   {
-    filters.map((label, i) => (
-      <button type="button" class="filter" aria-pressed={i === 0 ? 'true' : 'false'}>
+    filters.map((label) => (
+      <button
+        type="button"
+        class="filter"
+        data-filter={label === 'All' ? '' : label}
+        aria-pressed={label === 'All' ? 'true' : 'false'}
+      >
         {label}
       </button>
     ))
   }
 </div>
+<p class="visually-hidden" aria-live="polite" data-filter-status></p>
+
+<script>
+  const bar = document.querySelector<HTMLElement>('.filter-bar');
+  const status = document.querySelector<HTMLElement>('[data-filter-status]');
+  const buttons = [...document.querySelectorAll<HTMLButtonElement>('.filter')];
+  const cards = [...document.querySelectorAll<HTMLElement>('[data-categories]')];
+
+  function apply(filter: string) {
+    buttons.forEach((b) => b.setAttribute('aria-pressed', String((b.dataset.filter ?? '') === filter)));
+    let shown = 0;
+    cards.forEach((card) => {
+      const match = !filter || (card.dataset.categories ?? '').split('|').includes(filter);
+      card.hidden = !match;
+      if (match) shown += 1;
+    });
+    if (status) {
+      const count = `${shown} ${shown === 1 ? 'project' : 'projects'}`;
+      status.textContent = filter ? `Showing ${count} in ${filter}` : `Showing all ${count}`;
+    }
+  }
+
+  bar?.addEventListener('click', (event) => {
+    const button = (event.target as HTMLElement).closest<HTMLButtonElement>('.filter');
+    if (!button) return;
+    const filter = button.dataset.filter ?? '';
+    // Pressing the chip that's already on turns it off (back to All)
+    const isOn = button.getAttribute('aria-pressed') === 'true';
+    apply(isOn ? '' : filter);
+  });
+</script>
 
 <style>
   /* On phones the row scrolls sideways if the filters don't fit */
@@ -38,7 +78,7 @@ const filters = ['All', '3D prints', 'Furniture', 'Gifts', 'Outdoors'];
     font-size: var(--text-sm);
     font-weight: var(--weight-medium);
     cursor: pointer;
-    transition: background-color var(--duration-fast), border-color var(--duration-fast);
+    transition: background-color var(--duration-fast), border-color var(--duration-fast), color var(--duration-fast);
   }
 
   .filter:hover {
@@ -50,5 +90,10 @@ const filters = ['All', '3D prints', 'Furniture', 'Gifts', 'Outdoors'];
     border-color: var(--color-accent);
     background-color: var(--color-accent);
     color: var(--color-on-accent);
+  }
+
+  /* Cards set their own display, so make sure hidden ones really hide */
+  :global([data-categories][hidden]) {
+    display: none;
   }
 </style>

@@ -2,6 +2,7 @@
 title: Splash Lamp
 summary: A 3D-printed lamp with a twisting shade that opens at the top like a splash.
 type: 3D print
+categories: [Lighting]
 date: 2026-02-15
 dateLabel: February 2026
 materials:

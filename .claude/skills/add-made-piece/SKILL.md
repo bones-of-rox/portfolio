@@ -24,6 +24,7 @@ Donovan sends photos (and sometimes a video), plus a dictated title, background,
 ## 3. Write the entry
 Create `src/content/made/<slug>/index.md`. The fields are defined in `src/content.config.ts`, and `brain-trust-shot-glasses` is a complete example.
 - `title`, `summary` (one line), `type` (`3D print`, `Furniture`, `Utensil`, or `Other`), `date` (an approximate date is fine, since it's used for sorting) and `dateLabel` (e.g. "Fall 2025").
+- `categories`: which homepage filter chips show the piece, e.g. `[Lighting]` or `[Kitchen]` (a piece can have more than one, or none). The chip list lives in `src/categories.ts`; ask Donovan before adding a new one.
 - Optional: `madeFor`, `materials`, `tools`, `size`, `thumbnail`, `photos`, `video`.
 - Every photo needs `alt` text: describe what matters about the piece in that photo (shape, material, scale, setting), in a sentence or two. A video needs a `description` of what it shows.
 - The body is the story, in short paragraphs.

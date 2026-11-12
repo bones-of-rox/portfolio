@@ -13,13 +13,13 @@ interface Props {
 }
 
 const { piece } = Astro.props;
-const { title, type, dateLabel, date, cover, thumbnail } = piece.data;
+const { title, type, dateLabel, date, cover, thumbnail, categories } = piece.data;
 const when = dateLabel ?? String(date.getFullYear());
 const sketch = sketches[`/src/content/made/${piece.id}/sketch.jpg`]?.default;
 const sizes = '(min-width: 64em) 22rem, (min-width: 40em) 33vw, 50vw';
 ---
 
-<li class="card">
+<li class="card" data-categories={categories.join('|')}>
   <a class="card-link" href={url(`/fab-lab/${piece.id}/`)}>
     <div class="card-media">
       {
