@@ -143,7 +143,11 @@ const videoList = await Promise.all(
             {photos.map((photo) => (
               <li
                 class={
-                  (photoLayout === 'mixed' && photo.src.width > photo.src.height) ||
+                  photo.tile === 'center'
+                    ? 'tile tile-center'
+                    : photo.tile === 'half'
+                    ? 'tile'
+                    : (photoLayout === 'mixed' && photo.src.width > photo.src.height) ||
                   (photoLayout === 'grid' && photo.src.width > photo.src.height * 1.5)
                     ? 'tile tile-wide'
                     : 'tile'
@@ -546,6 +550,13 @@ const videoList = await Promise.all(
   @media (min-width: 40em) {
     .tile-wide {
       grid-column: 1 / -1;
+    }
+
+    /* A tall photo alone on its row, centered at the width of a half tile */
+    .tile-center {
+      grid-column: 1 / -1;
+      justify-self: center;
+      width: calc((100% - var(--space-4)) / 2);
     }
   }
 
