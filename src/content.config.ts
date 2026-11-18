@@ -15,6 +15,10 @@ const made = defineCollection({
       src: image(),
       alt: z.string().min(1, 'Every photo needs alt text'),
       caption: z.string().optional(),
+      // Overrides the automatic tile size in the mixed layout:
+      // 'half' sits beside its neighbor as a 4:5 tile (even a wide photo),
+      // 'center' is a 4:5 tile alone on its row, centered.
+      tile: z.enum(['half', 'center']).optional(),
     });
 
     return z.object({
