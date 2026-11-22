@@ -2,6 +2,7 @@
 title: Storage Shelf
 summary: A shelf that bridges the gap between a toilet tank and the wall, with a cubby for spare toilet paper.
 type: Furniture
+categories: [Wood, Plastic]
 date: 2026-07-01
 dateLabel: Summer 2026
 materials:
