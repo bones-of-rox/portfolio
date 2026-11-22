@@ -2,6 +2,7 @@
 title: Wedding Crowns
 summary: A set of custom wedding crowns my wife and I wore in a traditional Greek ceremony.
 type: 3D print
+categories: [Plastic, Ceremony]
 date: 2024-05-24
 dateLabel: May 2024
 madeFor: My wife and me, for our wedding
