@@ -236,6 +236,43 @@
     0 10px 28px rgb(0 0 0 / 0.55);
 }
 
+/*
+  Paper page (homepage preview 2026-11-22, per Donovan): the cream paper from the
+  pale renders, tiled across the whole background. Dark text, translucent grey chips.
+  --texture-paper-tile is set in BaseLayout, because its address depends on the base path.
+  Contrast on the paper (average #d6cec0 / darkest grain #c4bcae):
+  text 11.8 / 9.8, text-muted 6.9 / 5.7, accent 4.7 / 3.9 (hover and focus only), rule 4.7 / 3.9.
+  Chips: dark text on the translucent grey 9.7; the chosen chip (dark grey, white text) 11.9,
+  and it stands out from the paper at 7.6.
+*/
+.theme-paper {
+  color-scheme: light;
+  --color-bg: var(--color-paper);
+  --color-bg-fade: var(--color-paper);
+  --color-text: var(--gray-950);
+  --color-text-muted: var(--gray-700);
+  --color-border: var(--gray-600);
+  --color-border-strong: var(--gray-600);
+  --color-accent: var(--orange-800);
+  --color-accent-hover: var(--orange-800);
+  --color-on-accent: var(--white);
+  --color-highlight: var(--teal-800);
+  --color-header-rule: var(--gray-600);
+  --color-focus: var(--orange-800);
+  --paper-tile-size: 24rem; /* about the grain size seen behind the renders */
+  /* Filter chips: see-through grey with dark text; the chosen one is a darker grey */
+  --chip-bg: rgb(17 17 19 / 0.1);
+  --chip-bg-hover: rgb(17 17 19 / 0.16);
+  --chip-border: rgb(17 17 19 / 0.14);
+  --chip-text: var(--gray-950);
+  --chip-on-bg: rgb(17 17 19 / 0.8);
+  --chip-on-text: var(--white);
+  /* A lighter shadow than on the dark page, so tiles sit softly on the paper */
+  --card-shadow:
+    0 1px 3px rgb(40 30 20 / 0.18),
+    0 8px 24px rgb(40 30 20 / 0.2);
+}
+
 @media (min-width: 40em) {
   :root {
     --gutter: var(--space-8);

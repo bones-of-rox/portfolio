@@ -70,10 +70,10 @@ const filters = ['All', ...categories];
     flex: none;
     min-height: var(--target-min);
     padding-inline: var(--space-4);
-    border: var(--border-width) solid var(--color-border-strong);
+    border: var(--border-width) solid var(--chip-border, var(--color-border-strong));
     border-radius: var(--radius-pill);
-    background-color: var(--color-surface);
-    color: var(--color-text);
+    background-color: var(--chip-bg, var(--color-surface));
+    color: var(--chip-text, var(--color-text));
     font: inherit;
     font-size: var(--text-sm);
     font-weight: var(--weight-medium);
@@ -82,14 +82,14 @@ const filters = ['All', ...categories];
   }
 
   .filter:hover {
-    border-color: var(--color-text-muted);
-    background-color: var(--color-surface-raised);
+    border-color: var(--chip-border, var(--color-text-muted));
+    background-color: var(--chip-bg-hover, var(--color-surface-raised));
   }
 
   .filter[aria-pressed='true'] {
-    border-color: var(--color-accent);
-    background-color: var(--color-accent);
-    color: var(--color-on-accent);
+    border-color: var(--chip-on-bg, var(--color-accent));
+    background-color: var(--chip-on-bg, var(--color-accent));
+    color: var(--chip-on-text, var(--color-on-accent));
   }
 
   /* Cards set their own display, so make sure hidden ones really hide */

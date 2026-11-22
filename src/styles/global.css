@@ -80,6 +80,18 @@ body.theme-charcoal::after {
   display: none;
 }
 
+/* Paper page (homepage preview): the paper tile repeated across the whole screen. No scroll fade. */
+body.theme-paper::before {
+  background-color: var(--color-bg);
+  background-image: var(--texture-paper-tile);
+  background-size: var(--paper-tile-size) auto;
+  background-repeat: repeat;
+}
+
+body.theme-paper::after {
+  display: none;
+}
+
 /* Site header laid over the top of the page, e.g. over a full-bleed photo */
 body.header-over {
   position: relative;
