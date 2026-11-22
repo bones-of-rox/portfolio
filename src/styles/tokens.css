@@ -51,6 +51,10 @@
   --color-on-accent: var(--gray-950);
   --color-highlight: var(--teal-300);
   --color-header-rule: var(--gray-300);
+  /* Header brand: orange rule between PROJEKS and the icons, and the icon color.
+     Both are decorative; the rule still clears 3:1 on every background */
+  --color-header-divider: var(--orange-400);
+  --color-header-icons: var(--color-text-muted);
 
   /* Project tiles: white caption panel under each photo.
      Contrast on white: card-text 18.4, card-text-muted 7.4 */
@@ -89,6 +93,7 @@
 
   --tracking-tight: -0.015em;
   --tracking-wide: 0.06em;
+  --tracking-title: 0; /* PROJEKS in the header: tightened from wide (2026-11-22) */
 
   --measure: 65ch;
 
@@ -116,6 +121,13 @@
   --radius-lg: 1rem;
   --radius-pill: 999px;
   --border-width: 1px;
+  /* Header brand (title | hand + mouse + gear) */
+  --brand-gap: var(--space-3);
+  --brand-icon-gap: var(--space-1);
+  --brand-icon-size: 1.75rem;
+  --brand-icon-stroke: 1.75;
+  --brand-rule-width: 3px;
+  --brand-rule-height: 2.25rem;
   --underline-offset: 0.2em;
   --underline-thickness: 0.08em;
 
@@ -293,4 +305,25 @@
     --duration-medium: 0ms;
     --hover-zoom: 1;
   }
+}
+
+/*
+  Header brand colors per background (2026-11-22). The orange rule is decorative,
+  but stays at 3:1 or better anyway: orange-400 on the dark wood/photos,
+  orange-700 on white (5.2) and on the paper (3.6).
+*/
+.theme-light,
+.theme-paper {
+  --color-header-divider: var(--orange-700);
+  --color-header-icons: var(--color-text-muted);
+}
+
+/* Over a dark top photo the icons go white like the title; over a pale render they go dark */
+.header-over .site-header {
+  --color-header-icons: var(--color-on-photo);
+}
+
+.header-over-light .site-header {
+  --color-header-divider: var(--orange-700);
+  --color-header-icons: var(--color-text-muted);
 }
