@@ -75,6 +75,9 @@ const filters = ['All', ...categories];
     color: var(--chip-text, var(--color-text));
     font: inherit;
     font-size: var(--text-base); /* one step up from --text-sm, easier to read (2026-11-22) */
+    /* Center the capital letters, not the font's built-in line spacing: Cardo sits its
+       words high, so words without tails (Wood, Plastic) looked off-center */
+    text-box: trim-both cap alphabetic;
     font-weight: var(--weight-medium);
     cursor: pointer;
     transition: background-color var(--duration-fast), border-color var(--duration-fast), color var(--duration-fast);
