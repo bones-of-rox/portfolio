@@ -22,6 +22,8 @@ interface Props {
   light?: boolean;
   /** true: charcoal page with grain, a warm glow and shadowed tiles (homepage, 2026-11-12) */
   charcoal?: boolean;
+  /** true: the cream paper from the pale renders as the whole background (homepage preview, 2026-11-22) */
+  paper?: boolean;
 }
 
 const siteName = 'Projeks';
@@ -34,15 +36,17 @@ const {
   lightHeader = false,
   light = false,
   charcoal = false,
+  paper = false,
 } = Astro.props;
 // The wood photo lives in public/, so its address needs the site's base path
 const woodTexture = `url(${url('/textures/wood-grain.webp')})`;
 const grainTexture = `url(${url('/textures/grain.png')})`;
+const paperTile = `url(${url('/textures/paper-tile.jpg')})`;
 const pageTitle = title ? `${title} | ${siteName}` : siteName;
 ---
 
 <!doctype html>
-<html lang="en" id="top" style={`--texture-wood: ${woodTexture}; --texture-grain: ${grainTexture}`}>
+<html lang="en" id="top" style={`--texture-wood: ${woodTexture}; --texture-grain: ${grainTexture}; --texture-paper-tile: ${paperTile}`}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -50,7 +54,7 @@ const pageTitle = title ? `${title} | ${siteName}` : siteName;
     <meta name="description" content={description} />
     {noindex && <meta name="robots" content="noindex" />}
   </head>
-  <body class:list={{ 'bg-plain': plain, 'header-over': overlayHeader, 'header-over-light': overlayHeader && lightHeader, 'theme-light': light, 'theme-charcoal': charcoal }}>
+  <body class:list={{ 'bg-plain': plain, 'header-over': overlayHeader, 'header-over-light': overlayHeader && lightHeader, 'theme-light': light, 'theme-charcoal': charcoal, 'theme-paper': paper }}>
     <a class="skip-link" href="#main">Skip to content</a>
     <Header />
     <main id="main" tabindex="-1">
