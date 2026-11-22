@@ -2,6 +2,7 @@
 title: Shot Glasses
 summary: Custom 3D-printed shot glasses for a yearly weekend with close friends.
 type: 3D print
+categories: [Plastic, Ceremony]
 date: 2025-10-01
 dateLabel: Fall 2025
 madeFor: The Brain Trust
